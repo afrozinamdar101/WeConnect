@@ -1,4 +1,17 @@
+import { useState } from 'react';
+
 const Register = () => {
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [secret, setSecret] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(name, email, password, secret);
+  }
+
   return (
     <div className="container-fluid">
       <div className="row py-5 bg-secondary text-light">
@@ -9,12 +22,14 @@ const Register = () => {
 
       <div className="row py-5">
         <div className="col-md-6 offset-md-3">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group p-2">
               <small>
                 <label className="text-muted">Your name</label>
               </small>
               <input
+                onChange={(e) => setName(e.target.value)}
+                value={name}
                 type="text"
                 className="form-control"
                 placeholder="Enter name"
@@ -26,6 +41,8 @@ const Register = () => {
                 <label className="text-muted">Email adddress</label>
               </small>
               <input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 type="email"
                 className="form-control"
                 placeholder="Enter email"
@@ -37,6 +54,8 @@ const Register = () => {
                 <label className="text-muted">Password</label>
               </small>
               <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 type="password"
                 className="form-control"
                 placeholder="Enter password"
@@ -61,6 +80,8 @@ const Register = () => {
 
             <div className="form-group p-2">
               <input
+                onChange={(e) => setSecret(e.target.value)}
+                value={secret}
                 type="text"
                 className="form-control"
                 placeholder="Write your answer here"
