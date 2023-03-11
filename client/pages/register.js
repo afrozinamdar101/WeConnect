@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Modal } from "antd";
 import Link from "next/Link";
+import { SyncOutlined } from "@ant-design/icons";
 
 const Register = () => {
 
@@ -11,19 +12,28 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [secret, setSecret] = useState("");
   const [ok, setOk] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
     try {
-        const { data } = await axios.post("http://localhost:8000/api/register", {
+        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
         name,
         email,
         password,
         secret
       });
+      setName("");
+      setEmail("");
+      setPassword("");
+      setSecret("");
       setOk(data.ok);
+      setLoading(false);
     } catch (err) {
-      toast.error(error.response.data);
+      toast(err.response.data);
+      setLoading(false);
     } 
 };
 
@@ -113,7 +123,10 @@ const Register = () => {
             </div>
 
             <div className="form-group p-2">
-              <button className="btn btn-primary col-12">Submit</button>
+              <button disabled={!name || !email || !password || !secret}
+              className="btn btn-primary col-12">
+                { loading ? <SyncOutlined spin className="py-1" /> : "Submit" }
+                </button>
             </div>
           </form>
         </div>
@@ -123,13 +136,13 @@ const Register = () => {
         <div className="col">
           <Modal
             title="Congratulations!"
-            visible={ok}
+            open={ok}
             onCancel={() => setOk(false)}
             footer={null}
             >
               <p>You have successfully registered.</p>
-              <Link href="/login">
-                <a className="btn btn-primary btn-sm">Login</a>
+              <Link href="/login" className="btn btn-primary btn-sm">
+                Login
               </Link>
           </Modal>
         </div>
