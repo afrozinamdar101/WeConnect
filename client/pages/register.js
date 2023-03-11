@@ -1,25 +1,18 @@
-import { useState } from "react"; //for event handling
-import axios from "axios"; //for connecting to the backend
+
+import { useState } from 'react';
 
 const Register = () => {
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [secret, setsecret] = useState("");
+  const [secret, setSecret] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(name, email, password, secret);
-    axios
-      .post("http://localhost:8000/api/register", {
-        name,
-        email,
-        password,
-        secret,
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
+    console.log(name, email, password, secret);
+  }
+
 
   return (
     <div className="container-fluid">
@@ -37,8 +30,10 @@ const Register = () => {
                 <label className="text-muted">Your name</label>
               </small>
               <input
-                value={name}
+
                 onChange={(e) => setName(e.target.value)}
+                value={name}
+
                 type="text"
                 className="form-control"
                 placeholder="Enter name"
@@ -50,8 +45,10 @@ const Register = () => {
                 <label className="text-muted">Email adddress</label>
               </small>
               <input
-                value={email}
+
                 onChange={(e) => setEmail(e.target.value)}
+                value={email}
+
                 type="email"
                 className="form-control"
                 placeholder="Enter email"
@@ -63,8 +60,10 @@ const Register = () => {
                 <label className="text-muted">Password</label>
               </small>
               <input
-                value={password}
+
                 onChange={(e) => setPassword(e.target.value)}
+                value={password}
+
                 type="password"
                 className="form-control"
                 placeholder="Enter password"
@@ -89,8 +88,10 @@ const Register = () => {
 
             <div className="form-group p-2">
               <input
+
+                onChange={(e) => setSecret(e.target.value)}
                 value={secret}
-                onChange={(e) => setsecret(e.target.value)}
+
                 type="text"
                 className="form-control"
                 placeholder="Write your answer here"
