@@ -78,6 +78,15 @@ const Register = () => {
             </Link>
           </Modal>
         </div>
+
+        <div className="row">
+          <div className="col">
+            <p className="text-center">
+              Already registered?
+              <Link href="/login"> Login</Link>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
