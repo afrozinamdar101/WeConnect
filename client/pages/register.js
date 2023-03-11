@@ -1,4 +1,26 @@
+import { useState } from "react"; //for event handling
+import axios from "axios"; //for connecting to the backend
+
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [secret, setsecret] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(name, email, password, secret);
+    axios
+      .post("http://localhost:8000/api/register", {
+        name,
+        email,
+        password,
+        secret,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="container-fluid">
       <div className="row py-5 bg-secondary text-light">
@@ -9,12 +31,14 @@ const Register = () => {
 
       <div className="row py-5">
         <div className="col-md-6 offset-md-3">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group p-2">
               <small>
                 <label className="text-muted">Your name</label>
               </small>
               <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 className="form-control"
                 placeholder="Enter name"
@@ -26,6 +50,8 @@ const Register = () => {
                 <label className="text-muted">Email adddress</label>
               </small>
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 className="form-control"
                 placeholder="Enter email"
@@ -37,6 +63,8 @@ const Register = () => {
                 <label className="text-muted">Password</label>
               </small>
               <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 className="form-control"
                 placeholder="Enter password"
@@ -61,11 +89,14 @@ const Register = () => {
 
             <div className="form-group p-2">
               <input
+                value={secret}
+                onChange={(e) => setsecret(e.target.value)}
                 type="text"
                 className="form-control"
                 placeholder="Write your answer here"
               />
             </div>
+
             <div className="form-group p-2">
               <button className="btn btn-primary col-12">Submit</button>
             </div>
