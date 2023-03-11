@@ -21,7 +21,7 @@ export const register = async (req, res) => {
 
     try {
         await user.save();
-        console.log("Registered user =>", user);
+        // console.log("Registered user =>", user);
         return res.json({ ok: true });
     } catch (err) {
         console.log("Registration failed =>", err);
