@@ -26,7 +26,8 @@ const Login = () => {
           password,
         }
       );
-      router.push("/");
+      console.log(data);
+      // router.push("/");
     } catch (err) {
       toast(err.response.data);
       setLoading(false);
