@@ -29,13 +29,21 @@ const ForgotPassword = () => {
         secret,
       });
       console.log("forgot password response data", data);
-      //   setEmail("");
-      //   setNewPassword("");
-      //   setSecret("");
-      //   setOk(data.ok);
-      //   setLoading(false);
+
+      if (data.error) {
+        toast.error(data.error);
+        setLoading(false);
+      }
+
+      if (data.success) {
+        setEmail("");
+        setNewPassword("");
+        setSecret("");
+        setOk(true);
+        setLoading(false);
+      }
     } catch (err) {
-      toast(err.response.data);
+      toast(err);
       setLoading(false);
     }
   };
