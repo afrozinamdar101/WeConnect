@@ -1,6 +1,11 @@
 import express from "express";
 
-import { register, login, currentUser, forgotPassword } from "../controllers/auth.js";
+import {
+  register,
+  login,
+  currentUser,
+  forgotPassword,
+} from "../controllers/auth.js";
 import { requireSignIn } from "../middleware/index.js";
 
 const router = express.Router();
