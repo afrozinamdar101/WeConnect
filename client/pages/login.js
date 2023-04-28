@@ -21,13 +21,10 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post(`/login`, {
+        email,
+        password,
+      });
       // update context
       setState({
         user: data.user,
