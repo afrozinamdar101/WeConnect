@@ -8,16 +8,24 @@ export const register = async (req, res) => {
   const { name, email, password, secret } = req.body;
 
   // validation
-  if (!name) return res.status(400).send("Name is required");
-  if (!password || password.length < 6)
-    return res
-      .status(400)
-      .send("Password is required and should be at least 6 characters long");
-  if (!secret) return res.status(400).send("Answer is required");
+  if (!name) {
+    return res.json({ error: "Name is required" });
+  }
+  if (!password || password.length < 6) {
+    return res.json({
+      error: "Password is required and should be at least 6 characters long",
+    });
+  }
+
+  if (!secret) {
+    return res.json({ error: "Answer is required" });
+  }
 
   const existingUser = await User.findOne({ email });
 
-  if (existingUser) return res.status(400).send("Email is taken");
+  if (existingUser) {
+    return res.json({ error: "Email is taken" });
+  }
 
   // hash password
   const hashedPassword = await hashPassword(password);
@@ -30,7 +38,7 @@ export const register = async (req, res) => {
     return res.json({ ok: true });
   } catch (err) {
     console.log("Registration failed =>", err);
-    res.status(400).send("Error. Try again.");
+    res.json({ error: "Error. Try again." });
   }
 };
 
@@ -40,11 +48,15 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
-    if (!user) res.status(400).send("User doesn't exist.");
+    if (!user) {
+      res.json({ error: "User doesn't exist." });
+    }
 
     const match = comparePassword(password, user.password);
 
-    if (!match) res.status(400).send("Incorrect Password.");
+    if (!match) {
+      res.json({ error: "Incorrect Password." });
+    }
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
@@ -53,10 +65,10 @@ export const login = async (req, res) => {
     user.password = undefined;
     user.secret = undefined;
 
-    res.status(200).json({ user, token });
+    res.json({ user, token });
   } catch (err) {
     console.log(err);
-    res.status(400).send("Error. Please try again.");
+    res.json({ error: "Error. Please try again." });
   }
 };
 
@@ -99,7 +111,7 @@ export const forgotPassword = async (req, res) => {
     await User.findByIdAndUpdate(user._id, { password: hashed });
     return res.json({
       success:
-        "Password update successfully. You can now login with your new password",
+        "Password updated successfully. You can now login with your new password",
     });
   } catch (err) {
     console.log(err);

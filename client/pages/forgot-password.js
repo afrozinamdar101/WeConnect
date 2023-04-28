@@ -82,7 +82,7 @@ const ForgotPassword = () => {
             onCancel={() => setOk(false)}
             footer={null}
           >
-            <p>Password changes successfully.</p>
+            <p>Password changed successfully.</p>
             <Link href="/login" className="btn btn-primary btn-sm">
               Login
             </Link>

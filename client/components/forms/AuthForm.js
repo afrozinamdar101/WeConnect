@@ -88,8 +88,8 @@ const AuthForm = ({
       <button
         disabled={
           page !== "login"
-            ? !name || !email || !password || !secret
-            : !email || !password
+            ? !name || !email || !password || !secret || loading
+            : !email || !password || loading
         }
         className="btn btn-primary col-12"
       >

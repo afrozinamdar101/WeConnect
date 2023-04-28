@@ -25,14 +25,20 @@ const Login = () => {
         email,
         password,
       });
-      // update context
-      setState({
-        user: data.user,
-        token: data.token,
-      });
-      // save in local storage
-      window.localStorage.setItem("auth", JSON.stringify(data));
-      router.push("/");
+
+      if (data.error) {
+        toast.error(data.error);
+        setLoading(false);
+      } else {
+        // update context
+        setState({
+          user: data.user,
+          token: data.token,
+        });
+        // save in local storage
+        window.localStorage.setItem("auth", JSON.stringify(data));
+        router.push("/");
+      }
     } catch (err) {
       toast(err.response.data);
       setLoading(false);
