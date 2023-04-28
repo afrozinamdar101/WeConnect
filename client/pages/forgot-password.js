@@ -1,19 +1,21 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Modal } from "antd";
 import Link from "next/Link";
 import { useRouter } from "next/router";
 
-import AuthForm from "../components/forms/AuthForm";
+import ForgotPasswordForm from "../components/forms/ForgotPasswordForm";
 import { UserContext } from "../context";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [secret, setSecret] = useState("");
+  const [ok, setOk] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [state, setState] = useContext(UserContext);
-
+  const [state] = useContext(UserContext);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -21,18 +23,17 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const { data } = await axios.post(`/login`, {
+      const { data } = await axios.post(`/forgot-password`, {
         email,
-        password,
+        newPassword,
+        secret,
       });
-      // update context
-      setState({
-        user: data.user,
-        token: data.token,
-      });
-      // save in local storage
-      window.localStorage.setItem("auth", JSON.stringify(data));
-      router.push("/");
+      console.log("forgot password response data", data);
+      //   setEmail("");
+      //   setNewPassword("");
+      //   setSecret("");
+      //   setOk(data.ok);
+      //   setLoading(false);
     } catch (err) {
       toast(err.response.data);
       setLoading(false);
@@ -46,44 +47,42 @@ const Login = () => {
     <div className="container-fluid">
       <div className="row py-5 text-light bg-default-image">
         <div className="col text-center">
-          <h1>Login</h1>
+          <h1>Forgot Password</h1>
         </div>
       </div>
 
       <div className="row py-5">
         <div className="col-md-6 offset-md-3">
-          <AuthForm
+          <ForgotPasswordForm
             handleSubmit={handleSubmit}
             email={email}
             setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
+            newPassword={newPassword}
+            setNewPassword={setNewPassword}
+            secret={secret}
+            setSecret={setSecret}
             loading={loading}
-            page="login"
           />
         </div>
       </div>
 
       <div className="row">
         <div className="col">
-          <p className="text-center">
-            Not yet registered?
-            <Link href="/register"> Register</Link>
-          </p>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col">
-          <p className="text-center">
-            <Link href="/forgot-password" className="text-danger">
-              Forgot Password
+          <Modal
+            title="Congratulations!"
+            open={ok}
+            onCancel={() => setOk(false)}
+            footer={null}
+          >
+            <p>Password changes successfully.</p>
+            <Link href="/login" className="btn btn-primary btn-sm">
+              Login
             </Link>
-          </p>
+          </Modal>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default ForgotPassword;
