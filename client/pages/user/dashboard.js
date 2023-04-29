@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -13,8 +13,25 @@ const Dashboard = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState({});
   const [uploading, setUploading] = useState(false);
+  //posts
+  const [posts, setPosts] = useState([]);
+
   // route
   const router = useRouter();
+
+  useEffect(() => {
+    if (state && state.token) fetchUserPosts();
+  }, [state && state.token]);
+
+  const fetchUserPosts = async () => {
+    try {
+      const { data } = await axios.get("/user-posts");
+      // console.log("User posts =>", data);
+      setPosts(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const postSubmit = async (e) => {
     e.preventDefault();
@@ -75,6 +92,9 @@ const Dashboard = () => {
               image={image}
             />
           </div>
+
+          <pre>{JSON.stringify(posts, null, 4)}</pre>
+
           <div className="col md-4">Side bar</div>
         </div>
       </div>

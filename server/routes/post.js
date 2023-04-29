@@ -2,7 +2,7 @@ import express from "express";
 import formidable from "express-formidable";
 
 import { requireSignIn } from "../middleware/index.js";
-import { createPost, uploadImage } from "../controllers/post.js";
+import { createPost, uploadImage, userPosts } from "../controllers/post.js";
 
 const router = express.Router();
 
@@ -15,3 +15,5 @@ router.post(
 );
 
 export default router;
+
+router.get("/user-posts", requireSignIn, userPosts);
