@@ -1,4 +1,4 @@
-import Post from "../models/post";
+import Post from "../models/post.js";
 
 export const createPost = async (req, res) => {
   console.log("post => ", req.body);
@@ -17,4 +17,8 @@ export const createPost = async (req, res) => {
     console.log(err);
     return res.sendStatus(400);
   }
+};
+
+export const uploadImage = async (req, res) => {
+  console.log("Request files =>", req.files);
 };

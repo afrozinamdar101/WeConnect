@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import { readdirSync } from "fs";
+
 import authRoutes from "./routes/auth.js";
+import postRoutes from "./routes/post.js";
 
 const app = express();
 
@@ -29,7 +32,7 @@ app.use(
 
 // autoload routes
 // readdirSync("./routes").map((r) => app.use("/api", require(`./routes/${r}`)));
-app.use("/api", authRoutes);
+app.use("/api", [authRoutes, postRoutes]);
 
 app.post("/api/register", (req, res) => {
   console.log("Register Endpoint =>", req.body);

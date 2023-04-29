@@ -39,7 +39,7 @@ const Dashboard = () => {
     console.log([...formData]);
 
     try {
-      const { data } = await axios.post("upload-image", formData);
+      const { data } = await axios.post("/upload-image", formData);
     } catch (err) {
       console.log(err);
     }
