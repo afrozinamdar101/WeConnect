@@ -46,7 +46,7 @@ const Dashboard = () => {
       // console.log("Uploaded image =>", data);
       setImage({
         url: data.url,
-        publid_id: data.publid_id,
+        publid_id: data.public_id,
       });
       setUploading(false);
     } catch (err) {
