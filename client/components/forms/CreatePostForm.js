@@ -3,6 +3,7 @@ import { Avatar } from "antd";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 
+// dynamic import since the react-quill npm package is only available on client side but not on server side
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const CreatePostForm = ({ content, setContent, postSubmit }) => {
