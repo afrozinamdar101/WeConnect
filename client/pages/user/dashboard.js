@@ -11,6 +11,8 @@ const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
   // state
   const [content, setContent] = useState("");
+  const [image, setImage] = useState({});
+  const [uploading, setUploading] = useState(false);
   // route
   const router = useRouter();
 
@@ -18,7 +20,7 @@ const Dashboard = () => {
     e.preventDefault();
     // console.log("Content =>", content);
     try {
-      const { data } = await axios.post("/create-post", { content });
+      const { data } = await axios.post("/create-post", { content, image });
       console.log("Create post response => ", data);
 
       if (data.error) {
@@ -26,6 +28,7 @@ const Dashboard = () => {
       } else {
         toast.success("post created");
         setContent("");
+        setImage({});
       }
     } catch (err) {
       console.log(err);
@@ -37,12 +40,18 @@ const Dashboard = () => {
     let formData = new FormData();
     formData.append("image", file);
     // console.log([...formData]);
-
+    setUploading(true);
     try {
       const { data } = await axios.post("/upload-image", formData);
-      console.log("Uploaded image =>", data);
+      // console.log("Uploaded image =>", data);
+      setImage({
+        url: data.url,
+        publid_id: data.publid_id,
+      });
+      setUploading(false);
     } catch (err) {
       console.log(err);
+      setUploading(false);
     }
   };
 
@@ -62,6 +71,8 @@ const Dashboard = () => {
               setContent={setContent}
               postSubmit={postSubmit}
               handleImage={handleImage}
+              uploading={uploading}
+              image={image}
             />
           </div>
           <div className="col md-4">Side bar</div>
