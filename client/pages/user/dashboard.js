@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
@@ -19,6 +20,13 @@ const Dashboard = () => {
     try {
       const { data } = await axios.post("/create-post", { content });
       console.log("Create post response => ", data);
+
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        toast.success("post created");
+        setContent("");
+      }
     } catch (err) {
       console.log(err);
     }
