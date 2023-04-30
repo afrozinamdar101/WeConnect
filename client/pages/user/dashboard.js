@@ -7,6 +7,7 @@ import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 import PostForm from "../../components/forms/PostForm";
 import PostList from "../../components/cards/PostList";
+import People from "../../components/cards/People";
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -125,7 +126,7 @@ const Dashboard = () => {
           {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
 
           <div className="col md-4">
-            <pre>{JSON.stringify(people, null, 4)}</pre>
+            <People people={people} />
           </div>
         </div>
       </div>
