@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
-import CreatePostForm from "../../components/forms/CreatePostForm";
+import PostForm from "../../components/forms/PostForm";
 import PostList from "../../components/cards/PostList";
 
 const Dashboard = () => {
@@ -85,7 +85,7 @@ const Dashboard = () => {
 
         <div className="row py-5">
           <div className="col md-8">
-            <CreatePostForm
+            <PostForm
               content={content}
               setContent={setContent}
               postSubmit={postSubmit}

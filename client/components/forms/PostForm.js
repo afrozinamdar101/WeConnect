@@ -7,7 +7,7 @@ import { CameraOutlined, LoadingOutlined } from "@ant-design/icons";
 // dynamic import since the react-quill npm package is only available on client side but not on server side
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
-const CreatePostForm = ({
+const PostForm = ({
   content,
   setContent,
   postSubmit,
@@ -53,4 +53,4 @@ const CreatePostForm = ({
   );
 };
 
-export default CreatePostForm;
+export default PostForm;
