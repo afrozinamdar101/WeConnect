@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useRouter } from "next/router";
 import { Avatar } from "antd";
 
 import renderHTML from "react-render-html";
@@ -16,6 +17,7 @@ import { UserContext } from "../../context";
 
 const PostList = ({ posts }) => {
   const [state] = useContext(UserContext);
+  const router = useRouter();
 
   return (
     <>
@@ -46,7 +48,10 @@ const PostList = ({ posts }) => {
                   state.user &&
                   state.user._id === post.postedBy._id && (
                     <>
-                      <EditOutlined className="text-danger pt-2 h5 px-2 mx-auto" />
+                      <EditOutlined
+                        onClick={() => router.push(`/user/push/${post._id}`)}
+                        className="text-danger pt-2 h5 px-2 mx-auto"
+                      />
                       <DeleteOutlined className="text-danger pt-2 h5 px-2" />
                     </>
                   )}

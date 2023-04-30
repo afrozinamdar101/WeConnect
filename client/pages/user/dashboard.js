@@ -44,6 +44,7 @@ const Dashboard = () => {
       if (data.error) {
         toast.error(data.error);
       } else {
+        fetchUserPosts();
         toast.success("post created");
         setContent("");
         setImage({});
