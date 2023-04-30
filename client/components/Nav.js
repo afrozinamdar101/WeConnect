@@ -36,24 +36,40 @@ const Nav = () => {
 
       {state !== null ? (
         <>
-          <Link
-            href="/user/dashboard"
-            className={`nav-link text-light ${
-              currentLink === "/user/dashboard" && "active"
-            }`}
-          >
-            {state.user.name}
-          </Link>
-
-          <Link
-            href="/logout"
-            onClick={logout}
-            className={`nav-link text-light ${
-              currentLink === "/logout" && "active"
-            }`}
-          >
-            Logout
-          </Link>
+          <div className="dropdown">
+            <a
+              className="btn dropdown-toggle text-light"
+              role="button"
+              id="dropdownMenuLink"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {state && state.user && state.user.name}
+            </a>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li>
+                <Link
+                  href="/user/dashboard"
+                  className={`nav-link drpodown-item ${
+                    currentLink === "/user/dashboard" && "active"
+                  }`}
+                >
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/logout"
+                  onClick={logout}
+                  className={`nav-link dropdown-item ${
+                    currentLink === "/logout" && "active"
+                  }`}
+                >
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          </div>
         </>
       ) : (
         <>
