@@ -158,7 +158,7 @@ export const profileUpdate = async (req, res) => {
     });
 
     console.log("Updated user =>", updatedUser);
-    
+
     updatedUser.password = undefined;
     updatedUser.secret = undefined;
     return res.json(updatedUser);
@@ -167,5 +167,20 @@ export const profileUpdate = async (req, res) => {
     if (err.code === 11000) {
       return res.json({ error: "Duplicate username" });
     }
+  }
+};
+
+export const findPeople = async (req, res) => {
+  console.log(req.body);
+  try {
+    const user = await User.findById(req.user._id);
+    // user following list
+    let following = user.following;
+    following.push(user._id);
+    const people = await User.find({ _id: { $nin: following } }).limit(10);
+    return res.json(people);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
   }
 };

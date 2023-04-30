@@ -6,6 +6,7 @@ import {
   currentUser,
   forgotPassword,
   profileUpdate,
+  findPeople,
 } from "../controllers/auth.js";
 import { requireSignIn } from "../middleware/index.js";
 
@@ -16,5 +17,6 @@ router.post("/login", login);
 router.get("/current-user", requireSignIn, currentUser);
 router.post("/forgot-password", forgotPassword);
 router.put("/profile-update", requireSignIn, profileUpdate);
+router.get("/find-people", requireSignIn, findPeople);
 
 export default router;
