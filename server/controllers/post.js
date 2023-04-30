@@ -1,6 +1,7 @@
 import cloudinary from "cloudinary";
 
 import Post from "../models/post.js";
+import User from "../models/user.js";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -38,7 +39,7 @@ export const uploadImage = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.json({ error: "Error. Please try again." });
+    return res.json({ error: "Error. Please try again." });
   }
 };
 
@@ -53,7 +54,7 @@ export const userPosts = async (req, res) => {
     return res.json(posts);
   } catch (err) {
     console.log(err);
-    res.json({ error: "Error. Please try again." });
+    return res.json({ error: "Error. Please try again." });
   }
 };
 
@@ -63,7 +64,7 @@ export const userPost = async (req, res) => {
     return res.json(post);
   } catch (err) {
     console.log(err);
-    res.json({ error: "Error. Please try again." });
+    return res.json({ error: "Error. Please try again." });
   }
 };
 
@@ -76,7 +77,7 @@ export const updatePost = async (req, res) => {
     return res.json(updatedPost);
   } catch (err) {
     console.log(err);
-    res.json({ error: "Error. Please try again." });
+    return res.json({ error: "Error. Please try again." });
   }
 };
 
@@ -90,6 +91,25 @@ export const deletePost = async (req, res) => {
     return res.json({ ok: true });
   } catch (err) {
     console.log(err);
-    res.json({ error: "Error. Please try again." });
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const newsFeed = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    let following = user.following;
+    following.push(req.user._id);
+
+    const posts = await Post.find({ postedBy: { $in: following } })
+      .populate("postedBy", "_id name image")
+      .sort({
+        createdAt: -1,
+      })
+      .limit(10);
+    return res.json(posts);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
   }
 };

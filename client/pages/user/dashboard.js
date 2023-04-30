@@ -24,14 +24,14 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (state && state.token) {
-      fetchUserPosts();
+      newsFeed();
       findPeople();
     }
   }, [state && state.token]);
 
-  const fetchUserPosts = async () => {
+  const newsFeed = async () => {
     try {
-      const { data } = await axios.get("/user-posts");
+      const { data } = await axios.get("/news-feed");
       // console.log("User posts =>", data);
       setPosts(data);
     } catch (err) {
@@ -58,7 +58,7 @@ const Dashboard = () => {
       if (data.error) {
         toast.error(data.error);
       } else {
-        fetchUserPosts();
+        newsFeed();
         toast.success("post created");
         setContent("");
         setImage({});
@@ -94,7 +94,7 @@ const Dashboard = () => {
       if (!answer) return;
       const { data } = await axios.delete(`/delete-post/${post._id}`);
       toast.error("Post deleted successfully");
-      fetchUserPosts();
+      newsFeed();
     } catch (err) {
       console.log(err);
     }
@@ -119,6 +119,7 @@ const Dashboard = () => {
       setPeople(filtered);
 
       // re-render the posts in news feed
+      newsFeed();
       toast.success(`Following ${user.name}`);
     } catch (err) {
       console.log(err);
