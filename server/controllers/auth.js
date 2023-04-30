@@ -157,7 +157,7 @@ export const profileUpdate = async (req, res) => {
       new: true,
     });
 
-    console.log("Updated user =>", updatedUser);
+    // console.log("Updated user =>", updatedUser);
 
     updatedUser.password = undefined;
     updatedUser.secret = undefined;
@@ -181,6 +181,35 @@ export const findPeople = async (req, res) => {
       .select("-password -secret")
       .limit(10);
     return res.json(people);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+// middleware
+export const addFollower = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.body._id, {
+      $addToSet: { followers: req.user._id },
+    });
+    next();
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const userFollow = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $addToSet: { following: req.body._id },
+      },
+      { new: true }
+    ).select("-password -secret");
+    return res.json(user);
   } catch (err) {
     console.log(err);
     return res.json({ error: "Error. Please try again." });
