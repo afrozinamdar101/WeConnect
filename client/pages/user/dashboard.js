@@ -16,12 +16,16 @@ const Dashboard = () => {
   const [uploading, setUploading] = useState(false);
   //posts
   const [posts, setPosts] = useState([]);
-
+  //people
+  const [people, setPeople] = useState([]);
   // route
   const router = useRouter();
 
   useEffect(() => {
-    if (state && state.token) fetchUserPosts();
+    if (state && state.token) {
+      fetchUserPosts();
+      findPeople();
+    }
   }, [state && state.token]);
 
   const fetchUserPosts = async () => {
@@ -29,6 +33,15 @@ const Dashboard = () => {
       const { data } = await axios.get("/user-posts");
       // console.log("User posts =>", data);
       setPosts(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const findPeople = async () => {
+    try {
+      const { data } = await axios.get("/find-people");
+      setPeople(data);
     } catch (err) {
       console.log(err);
     }
@@ -111,7 +124,9 @@ const Dashboard = () => {
 
           {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
 
-          <div className="col md-4">Side bar</div>
+          <div className="col md-4">
+            <pre>{JSON.stringify(people, null, 4)}</pre>
+          </div>
         </div>
       </div>
     </UserRoute>
