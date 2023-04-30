@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { nanoid } from "nanoid";
 
 import User from "../models/user.js";
 import { hashPassword, comparePassword } from "../helpers/auth.js";
@@ -30,7 +31,13 @@ export const register = async (req, res) => {
   // hash password
   const hashedPassword = await hashPassword(password);
 
-  const user = new User({ name, email, password: hashedPassword, secret });
+  const user = new User({
+    name,
+    email,
+    password: hashedPassword,
+    secret,
+    username: nanoid(6),
+  });
 
   try {
     await user.save();
