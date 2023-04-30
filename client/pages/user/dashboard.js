@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 import CreatePostForm from "../../components/forms/CreatePostForm";
+import PostList from "../../components/cards/PostList";
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -91,9 +92,9 @@ const Dashboard = () => {
               uploading={uploading}
               image={image}
             />
+            <br />
+            <PostList posts={posts} />
           </div>
-
-          <pre>{JSON.stringify(posts, null, 4)}</pre>
 
           <div className="col md-4">Side bar</div>
         </div>
