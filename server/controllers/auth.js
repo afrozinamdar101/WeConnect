@@ -171,7 +171,7 @@ export const profileUpdate = async (req, res) => {
 };
 
 export const findPeople = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const user = await User.findById(req.user._id);
     // user following list

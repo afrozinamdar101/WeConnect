@@ -3,12 +3,14 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { Modal } from "antd";
 
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
 import PostForm from "../../components/forms/PostForm";
 import PostList from "../../components/cards/PostList";
 import People from "../../components/cards/People";
+import CommentForm from "../../components/forms/CommentForm";
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -20,6 +22,11 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   //people
   const [people, setPeople] = useState([]);
+  // comments
+  const [comment, setComment] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [currentPost, setCurrentPost] = useState({});
+
   // route
   const router = useRouter();
 
@@ -149,6 +156,31 @@ const Dashboard = () => {
     }
   };
 
+  const handleComment = (post) => {
+    setCurrentPost(post);
+    setVisible(true);
+  };
+
+  const addComment = async (e) => {
+    e.preventDefault();
+    // console.log("Add comment =>", currentPost._id);
+    // console.log("Comment =>", comment);
+    try {
+      const { data } = await axios.put("/add-comment", {
+        postId: currentPost._id,
+        comment,
+      });
+      console.log(data);
+      setComment("");
+      setVisible(false);
+      newsFeed();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeComment = async () => {};
+
   return (
     <UserRoute>
       <div className="container-fluid">
@@ -174,6 +206,7 @@ const Dashboard = () => {
               handleDelete={handleDelete}
               handleLike={handleLike}
               handleUnlike={handleUnlike}
+              handleComment={handleComment}
             />
           </div>
 
@@ -181,13 +214,30 @@ const Dashboard = () => {
 
           <div className="col md-4">
             {state && state.user && state.user.following && (
-              <Link href={`/user/following`} className="h6">
+              <Link
+                href={`/user/following`}
+                className="h6"
+                style={{ textDecoration: "none" }}
+              >
                 {state.user.following.length} Following
               </Link>
             )}
             <People people={people} handleFollow={handleFollow} />
           </div>
         </div>
+
+        <Modal
+          open={visible}
+          onCancel={() => setVisible(false)}
+          title="Comment"
+          footer={null}
+        >
+          <CommentForm
+            comment={comment}
+            setComment={setComment}
+            addComment={addComment}
+          />
+        </Modal>
       </div>
     </UserRoute>
   );

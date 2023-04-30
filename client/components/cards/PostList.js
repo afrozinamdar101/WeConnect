@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { Avatar } from "antd";
-
 import renderHTML from "react-render-html";
 import moment from "moment";
 import {
@@ -11,12 +10,19 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+import Link from "next/link";
 
 import PostImage from "../images/PostImage";
 import { UserContext } from "../../context";
 import { imageSource } from "../../functions";
 
-const PostList = ({ posts, handleDelete, handleLike, handleUnlike }) => {
+const PostList = ({
+  posts,
+  handleDelete,
+  handleLike,
+  handleUnlike,
+  handleComment,
+}) => {
   const [state] = useContext(UserContext);
   const router = useRouter();
 
@@ -39,7 +45,10 @@ const PostList = ({ posts, handleDelete, handleLike, handleUnlike }) => {
             <div className="card-footer">
               {post.image && <PostImage url={post.image.url} />}
               <div className="d-flex pt-2">
-                {post.likes.includes(state.user._id) ? (
+                {state &&
+                state.user &&
+                post.likes &&
+                post.likes.includes(state.user._id) ? (
                   <HeartFilled
                     onClick={() => handleUnlike(post._id)}
                     className="text-danger pt-2 h5 px-2"
@@ -53,8 +62,18 @@ const PostList = ({ posts, handleDelete, handleLike, handleUnlike }) => {
                 <div className="pt-2 pl-3" style={{ marginRight: "1rem" }}>
                   {post.likes.length} Like
                 </div>
-                <CommentOutlined className="text-danger pt-2 h5 px-2" />
-                <div className="pt-2 pl-3">{post.comments.length} Comment</div>
+                <CommentOutlined
+                  onClick={() => handleComment(post)}
+                  className="text-danger pt-2 h5 px-2"
+                />
+                <div className="pt-2 pl-3">
+                  <Link
+                    href={`/post/${post._id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    {post.comments.length} Comments
+                  </Link>
+                </div>
 
                 {state &&
                   state.user &&

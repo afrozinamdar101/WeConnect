@@ -154,7 +154,10 @@ const ProfileUpdate = () => {
           <div className="col">
             <p className="text-center">
               Already registered?
-              <Link href="/login"> Login</Link>
+              <Link href="/login" style={{ textDecoration: "none" }}>
+                {" "}
+                Login
+              </Link>
             </p>
           </div>
         </div>

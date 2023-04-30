@@ -32,7 +32,7 @@ export const uploadImage = async (req, res) => {
   // console.log("Request files =>", req.files);
   try {
     const result = await cloudinary.uploader.upload(req.files.image.path);
-    console.log("Uploaded image url =>", result);
+    // console.log("Uploaded image url =>", result);
     return res.json({
       url: result.secure_url, // https URL
       public_id: result.public_id,
@@ -103,6 +103,7 @@ export const newsFeed = async (req, res) => {
 
     const posts = await Post.find({ postedBy: { $in: following } })
       .populate("postedBy", "_id name image")
+      .populate("comments.postedBy", "_id name image")
       .sort({
         createdAt: -1,
       })
@@ -140,6 +141,38 @@ export const unlikePost = async (req, res) => {
       { new: true }
     );
     return res.json(unlikedPost);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const addComment = async (req, res) => {
+  try {
+    const { postId, comment } = req.body;
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      { $push: { comments: { text: comment, postedBy: req.user._id } } },
+      { new: true }
+    )
+      .populate("postedBy", "_id name image")
+      .populate("comments.postedBy", "_id name image");
+    return res.json(post);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const removeComment = async (req, res) => {
+  try {
+    const { postId, comment } = req.body;
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      { $pull: { comments: { _id: comment._id } } },
+      { new: true }
+    );
+    return res.json(post);
   } catch (err) {
     console.log(err);
     return res.json({ error: "Error. Please try again." });
