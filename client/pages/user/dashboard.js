@@ -96,6 +96,8 @@ const Dashboard = () => {
             <PostList posts={posts} />
           </div>
 
+          {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
+
           <div className="col md-4">Side bar</div>
         </div>
       </div>

@@ -2,6 +2,8 @@ import { Avatar } from "antd";
 import renderHTML from "react-render-html";
 import moment from "moment";
 
+import PostImage from "../images/PostImage";
+
 const PostList = ({ posts }) => {
   return (
     <>
@@ -9,8 +11,7 @@ const PostList = ({ posts }) => {
         posts.map((post) => (
           <div key={post._id} className="card mb-5">
             <div className="card-header">
-              <Avatar size={40}>{post.postedBy.name[0]}</Avatar>
-              {""}
+              <Avatar size={40}>{post.postedBy.name[0]}</Avatar>{" "}
               <span className="pt-2 ml-3" style={{ marginLeft: "1rem" }}>
                 {post.postedBy.name}
               </span>
@@ -20,11 +21,8 @@ const PostList = ({ posts }) => {
             </div>
             <div className="card-body">{renderHTML(post.content)}</div>
             <div className="card-footer">
-              <img
-                src={post.image && post.image.url}
-                alt={post.postedBy.name}
-              ></img>
-              <div className="pt-3"></div>
+              {post.image && <PostImage url={post.image.url} />}
+              <div className="pt-3">like / unlike / comments</div>
             </div>
           </div>
         ))}
