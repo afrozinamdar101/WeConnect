@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Link from "next/Link";
 import { useRouter } from "next/router";
+import { Avatar } from "antd";
 
 import { UserContext } from "../context";
 
@@ -31,6 +32,7 @@ const Nav = () => {
           currentLink === "/" && "active"
         }`}
       >
+        <Avatar src="/images/logo.png" />
         WeConnect
       </Link>
 
