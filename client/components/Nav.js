@@ -59,6 +59,16 @@ const Nav = () => {
               </li>
               <li>
                 <Link
+                  href="/user/profile/update"
+                  className={`nav-link drpodown-item ${
+                    currentLink === "/user/profile/update" && "active"
+                  }`}
+                >
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/logout"
                   onClick={logout}
                   className={`nav-link dropdown-item ${
