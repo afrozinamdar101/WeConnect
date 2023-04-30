@@ -49,7 +49,7 @@ const PostList = ({ posts }) => {
                   state.user._id === post.postedBy._id && (
                     <>
                       <EditOutlined
-                        onClick={() => router.push(`/user/push/${post._id}`)}
+                        onClick={() => router.push(`/user/post/${post._id}`)}
                         className="text-danger pt-2 h5 px-2 mx-auto"
                       />
                       <DeleteOutlined className="text-danger pt-2 h5 px-2" />
