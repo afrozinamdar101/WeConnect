@@ -10,6 +10,8 @@ import {
   updatePost,
   deletePost,
   newsFeed,
+  likePost,
+  unlikePost,
 } from "../controllers/post.js";
 
 const router = express.Router();
@@ -30,6 +32,8 @@ router.delete(
   canEditDeletePost,
   deletePost
 );
-
 router.get("/news-feed", requireSignIn, newsFeed);
+router.put("/like-post", requireSignIn, likePost);
+router.put("/unlike-post", requireSignIn, unlikePost);
+
 export default router;

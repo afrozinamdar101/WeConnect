@@ -15,7 +15,7 @@ import {
 import PostImage from "../images/PostImage";
 import { UserContext } from "../../context";
 
-const PostList = ({ posts, handleDelete }) => {
+const PostList = ({ posts, handleDelete, handleLike, handleUnlike }) => {
   const [state] = useContext(UserContext);
   const router = useRouter();
 
@@ -37,12 +37,22 @@ const PostList = ({ posts, handleDelete }) => {
             <div className="card-footer">
               {post.image && <PostImage url={post.image.url} />}
               <div className="d-flex pt-2">
-                <HeartOutlined className="text-danger pt-2 h5 px-2" />
+                {post.likes.includes(state.user._id) ? (
+                  <HeartFilled
+                    onClick={() => handleUnlike(post._id)}
+                    className="text-danger pt-2 h5 px-2"
+                  />
+                ) : (
+                  <HeartOutlined
+                    onClick={() => handleLike(post._id)}
+                    className="text-danger pt-2 h5 px-2"
+                  />
+                )}
                 <div className="pt-2 pl-3" style={{ marginRight: "1rem" }}>
-                  3 likes
+                  Like
                 </div>
                 <CommentOutlined className="text-danger pt-2 h5 px-2" />
-                <div className="pt-2 pl-3">2 comments</div>
+                <div className="pt-2 pl-3">Comment</div>
 
                 {state &&
                   state.user &&

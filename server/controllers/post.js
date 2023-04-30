@@ -10,7 +10,7 @@ cloudinary.config({
 });
 
 export const createPost = async (req, res) => {
-  console.log("post => ", req.body);
+  // console.log("post => ", req.body);
   const { content, image } = req.body;
 
   if (!content.length) {
@@ -69,7 +69,7 @@ export const userPost = async (req, res) => {
 };
 
 export const updatePost = async (req, res) => {
-  console.log("Update post =>", req.body);
+  // console.log("Update post =>", req.body);
   try {
     const updatedPost = await Post.findByIdAndUpdate(req.params._id, req.body, {
       new: true,
@@ -108,6 +108,38 @@ export const newsFeed = async (req, res) => {
       })
       .limit(10);
     return res.json(posts);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const likePost = async (req, res) => {
+  try {
+    const likedPost = await Post.findByIdAndUpdate(
+      req.body._id,
+      {
+        $addToSet: { likes: req.user._id },
+      },
+      { new: true }
+    );
+    return res.json(likedPost);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const unlikePost = async (req, res) => {
+  try {
+    const unlikedPost = await Post.findByIdAndUpdate(
+      req.body._id,
+      {
+        $pull: { likes: req.user._id },
+      },
+      { new: true }
+    );
+    return res.json(unlikedPost);
   } catch (err) {
     console.log(err);
     return res.json({ error: "Error. Please try again." });
