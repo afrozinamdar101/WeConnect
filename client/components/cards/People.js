@@ -4,7 +4,7 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { UserContext } from "../../context";
 
-const people = ({ people, handleFollow }) => {
+const People = ({ people, handleFollow }) => {
   const [state] = useContext(UserContext);
   const router = useRouter();
 
@@ -44,4 +44,4 @@ const people = ({ people, handleFollow }) => {
   );
 };
 
-export default people;
+export default People;

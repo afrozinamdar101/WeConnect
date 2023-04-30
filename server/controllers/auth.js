@@ -215,3 +215,42 @@ export const userFollow = async (req, res) => {
     return res.json({ error: "Error. Please try again." });
   }
 };
+
+export const userFollowing = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    const following = await User.find({ _id: user.following }).limit(100);
+    return res.json(following);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const removeFollower = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.body._id, {
+      $pull: { followers: req.user._id },
+    });
+    next();
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const userUnfollow = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $pull: { following: req.body._id },
+      },
+      { new: true }
+    );
+    return res.json(user);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};

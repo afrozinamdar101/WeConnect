@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
@@ -152,6 +153,11 @@ const Dashboard = () => {
           {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
 
           <div className="col md-4">
+            {state && state.user && state.user.following && (
+              <Link href={`/user/following`} className="h6">
+                {state.user.following.length} Following
+              </Link>
+            )}
             <People people={people} handleFollow={handleFollow} />
           </div>
         </div>
