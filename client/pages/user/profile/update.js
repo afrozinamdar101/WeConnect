@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Modal } from "antd";
@@ -21,12 +21,24 @@ const ProfileUpdate = () => {
   const [state] = useContext(UserContext);
   const router = useRouter();
 
+  useEffect(() => {
+    if (state && state.user) {
+      setUsername(state.user.username);
+      setAbout(state.user.about);
+      setName(state.user.name);
+      setEmail(state.user.email);
+      setSecret(state.user.secret);
+    }
+  }, [state && state.user]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
     try {
-      const { data } = await axios.post(`/register`, {
+      const { data } = await axios.put(`/profile-update`, {
+        username,
+        about,
         name,
         email,
         password,
@@ -37,10 +49,6 @@ const ProfileUpdate = () => {
         toast.error(data.error);
         setLoading(false);
       } else {
-        setName("");
-        setEmail("");
-        setPassword("");
-        setSecret("");
         setOk(data.ok);
         setLoading(false);
       }
@@ -61,6 +69,7 @@ const ProfileUpdate = () => {
       <div className="row py-5">
         <div className="col-md-6 offset-md-3">
           <AuthForm
+            profileUpdate={true}
             username={username}
             setUsername={setUsername}
             about={about}
@@ -75,7 +84,6 @@ const ProfileUpdate = () => {
             secret={secret}
             setSecret={setSecret}
             loading={loading}
-            page="profile"
           />
         </div>
       </div>

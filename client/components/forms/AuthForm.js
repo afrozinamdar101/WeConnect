@@ -16,9 +16,10 @@ const AuthForm = ({
   setUsername,
   about,
   setAbout,
+  profileUpdate,
 }) => (
   <form onSubmit={handleSubmit}>
-    {page === "profile" && (
+    {profileUpdate && (
       <>
         <div className="form-group p-2">
           <small>
@@ -67,6 +68,7 @@ const AuthForm = ({
         <label className="text-muted">Email adddress</label>
       </small>
       <input
+        disabled={profileUpdate}
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         type="email"
@@ -120,7 +122,9 @@ const AuthForm = ({
     <div className="form-group p-2">
       <button
         disabled={
-          page !== "login"
+          profileUpdate
+            ? loading
+            : page !== "login"
             ? !name || !email || !password || !secret || loading
             : !email || !password || loading
         }
@@ -128,6 +132,8 @@ const AuthForm = ({
       >
         {loading ? (
           <SyncOutlined spin className="py-1" />
+        ) : profileUpdate ? (
+          "Update"
         ) : page !== "login" ? (
           "Submit"
         ) : (
