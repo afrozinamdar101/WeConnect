@@ -27,7 +27,6 @@ const ProfileUpdate = () => {
       setAbout(state.user.about);
       setName(state.user.name);
       setEmail(state.user.email);
-      setSecret(state.user.secret);
     }
   }, [state && state.user]);
 
@@ -45,11 +44,13 @@ const ProfileUpdate = () => {
         secret,
       });
 
+      console.log(data);
+
       if (data.error) {
         toast.error(data.error);
         setLoading(false);
       } else {
-        setOk(data.ok);
+        setOk(true);
         setLoading(false);
       }
     } catch (err) {
@@ -96,10 +97,7 @@ const ProfileUpdate = () => {
             onCancel={() => setOk(false)}
             footer={null}
           >
-            <p>You have successfully registered.</p>
-            <Link href="/login" className="btn btn-primary btn-sm">
-              Login
-            </Link>
+            <p>You have successfully updated your profile.</p>
           </Modal>
         </div>
 

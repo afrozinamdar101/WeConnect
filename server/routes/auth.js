@@ -5,6 +5,7 @@ import {
   login,
   currentUser,
   forgotPassword,
+  profileUpdate,
 } from "../controllers/auth.js";
 import { requireSignIn } from "../middleware/index.js";
 
@@ -14,5 +15,6 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/current-user", requireSignIn, currentUser);
 router.post("/forgot-password", forgotPassword);
+router.put("/profile-update", requireSignIn, profileUpdate);
 
 export default router;
