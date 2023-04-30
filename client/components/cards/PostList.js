@@ -91,6 +91,29 @@ const PostList = ({
                   )}
               </div>
             </div>
+
+            {post.comments && post.comments.length > 0 && (
+              <ol className="list-group">
+                {post.comments.map((comment) => (
+                  <li className="list-group-item d-flex justify-content-between align-items-start">
+                    <div className="ms-2 me-auto">
+                      <div>
+                        <Avatar
+                          size={20}
+                          className="mb-1 mr-3"
+                          src={imageSource(comment.postedBy)}
+                        />{" "}
+                        {comment.postedBy.name}
+                      </div>
+                      <div>{comment.text}</div>
+                    </div>
+                    <span className="badge round-pill text-muted">
+                      {moment(comment.created).fromNow()}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            )}
           </div>
         ))}
     </>
