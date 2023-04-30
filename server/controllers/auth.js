@@ -149,11 +149,16 @@ export const profileUpdate = async (req, res) => {
         data.password = await hashPassword(req.body.password);
       }
     }
+    if (req.body.image) {
+      data.image = req.body.image;
+    }
 
     let updatedUser = await User.findByIdAndUpdate(req.user._id, data, {
       new: true,
     });
+
     console.log("Updated user =>", updatedUser);
+    
     updatedUser.password = undefined;
     updatedUser.secret = undefined;
     return res.json(updatedUser);

@@ -10,7 +10,7 @@ const userSchema = new Schema(
     secret: { type: String, required: true, lowercase: true },
     username: { type: String, unique: true, required: true },
     about: {},
-    photo: { type: String },
+    image: { url: String, public_id: String },
     following: [{ type: Schema.ObjectId, ref: "User" }],
     followers: [{ type: Schema.ObjectId, ref: "User" }],
   },
