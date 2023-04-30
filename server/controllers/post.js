@@ -38,6 +38,7 @@ export const uploadImage = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
+    res.json({ error: "Error. Please try again." });
   }
 };
 
@@ -52,6 +53,7 @@ export const userPosts = async (req, res) => {
     return res.json(posts);
   } catch (err) {
     console.log(err);
+    res.json({ error: "Error. Please try again." });
   }
 };
 
@@ -61,5 +63,19 @@ export const userPost = async (req, res) => {
     return res.json(post);
   } catch (err) {
     console.log(err);
+    res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const updatePost = async (req, res) => {
+  console.log("Update post =>", req.body);
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(req.params._id, req.body, {
+      new: true,
+    });
+    return res.json(updatedPost);
+  } catch (err) {
+    console.log(err);
+    res.json({ error: "Error. Please try again." });
   }
 };
