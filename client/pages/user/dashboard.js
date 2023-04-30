@@ -74,6 +74,18 @@ const Dashboard = () => {
     }
   };
 
+  const handleDelete = async (post) => {
+    try {
+      const answer = window.confirm("Confirm Delete?");
+      if (!answer) return;
+      const { data } = await axios.delete(`/delete-post/${post._id}`);
+      toast.error("Post deleted successfully");
+      fetchUserPosts();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <UserRoute>
       <div className="container-fluid">
@@ -94,7 +106,7 @@ const Dashboard = () => {
               image={image}
             />
             <br />
-            <PostList posts={posts} />
+            <PostList posts={posts} handleDelete={handleDelete} />
           </div>
 
           {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}

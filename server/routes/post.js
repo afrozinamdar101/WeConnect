@@ -8,6 +8,7 @@ import {
   userPosts,
   userPost,
   updatePost,
+  deletePost,
 } from "../controllers/post.js";
 
 const router = express.Router();
@@ -22,5 +23,10 @@ router.post(
 router.get("/user-posts", requireSignIn, userPosts);
 router.get("/user-post/:_id", requireSignIn, userPost);
 router.put("/update-post/:_id", requireSignIn, canEditDeletePost, updatePost);
-
+router.delete(
+  "/delete-post/:_id",
+  requireSignIn,
+  canEditDeletePost,
+  deletePost
+);
 export default router;
