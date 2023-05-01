@@ -273,3 +273,15 @@ export const searchUser = async (req, res) => {
     return res.json({ error: "Error. Please try again." });
   }
 };
+
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username }).select(
+      "-password -secret"
+    );
+    return res.json(user);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
