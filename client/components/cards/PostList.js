@@ -35,7 +35,7 @@ const PostList = ({
           <Post
             key={post._id}
             post={post}
-            handleDelete={handleDelete}
+            // handleDelete={handleDelete}
             handleLike={handleLike}
             handleUnlike={handleUnlike}
             handleComment={handleComment}

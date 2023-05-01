@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { Avatar } from "antd";
 import renderHTML from "react-render-html";
@@ -11,6 +11,8 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 import PostImage from "../images/PostImage";
 import { UserContext } from "../../context";
@@ -18,7 +20,7 @@ import { imageSource } from "../../functions";
 
 const Post = ({
   post,
-  handleDelete,
+  // handleDelete,
   handleLike,
   handleUnlike,
   handleComment,
@@ -26,8 +28,31 @@ const Post = ({
   removeComment,
   page,
 }) => {
+  // const [post, setPost] = useState({});
   const [state] = useContext(UserContext);
   const router = useRouter();
+
+  // const fetchPost = async () => {
+  //   try {
+  //     const { data } = await axios.get(`/user-post/${_id}`);
+  //     setPost(data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const handleDelete = async (post) => {
+    try {
+      const answer = window.confirm("Confirm Delete?");
+      if (!answer) return;
+      console.log("deletion confirmed");
+      const { data } = await axios.delete(`/delete-post/${post._id}`);
+      toast.error("Post deleted successfully");
+      router.push("/user/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
