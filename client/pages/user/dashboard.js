@@ -11,6 +11,7 @@ import PostForm from "../../components/forms/PostForm";
 import PostList from "../../components/cards/PostList";
 import People from "../../components/cards/People";
 import CommentForm from "../../components/forms/CommentForm";
+import Search from "../../components/Search";
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -238,12 +239,15 @@ const Dashboard = () => {
               current={page}
               total={(totalPosts / 2) * 10}
               onChange={(value) => setPage(value)}
+              className="pb-5"
             />
           </div>
 
           {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
 
           <div className="col md-4">
+            <Search />
+            <br />
             {state && state.user && state.user.following && (
               <Link
                 href={`/user/following`}

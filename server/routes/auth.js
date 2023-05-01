@@ -12,6 +12,7 @@ import {
   userFollowing,
   removeFollower,
   userUnfollow,
+  searchUser,
 } from "../controllers/auth.js";
 import { requireSignIn } from "../middleware/index.js";
 
@@ -26,5 +27,6 @@ router.get("/find-people", requireSignIn, findPeople);
 router.put("/user-follow", requireSignIn, addFollower, userFollow);
 router.put("/user-unfollow", requireSignIn, removeFollower, userUnfollow);
 router.get("/user-following", requireSignIn, userFollowing);
+router.get("/search-user/:query", searchUser);
 
 export default router;
