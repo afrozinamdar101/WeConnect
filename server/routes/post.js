@@ -14,6 +14,7 @@ import {
   unlikePost,
   addComment,
   removeComment,
+  totalPosts,
 } from "../controllers/post.js";
 
 const router = express.Router();
@@ -34,10 +35,11 @@ router.delete(
   canEditDeletePost,
   deletePost
 );
-router.get("/news-feed", requireSignIn, newsFeed);
+router.get("/news-feed/:page", requireSignIn, newsFeed);
 router.put("/like-post", requireSignIn, likePost);
 router.put("/unlike-post", requireSignIn, unlikePost);
 router.put("/add-comment", requireSignIn, addComment);
 router.put("/remove-comment", requireSignIn, removeComment);
+router.get("/total-posts", totalPosts);
 
 export default router;

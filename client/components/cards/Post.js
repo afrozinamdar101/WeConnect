@@ -65,7 +65,7 @@ const Post = ({
                 {post.likes.length} Like
               </div>
               <CommentOutlined
-                onClick={() => page === "PostList" && handleComment(post)}
+                onClick={() => handleComment(post)}
                 className="text-danger pt-2 h5 px-2"
               />
               <div className="pt-2 pl-3">
@@ -83,12 +83,10 @@ const Post = ({
                     onClick={() => router.push(`/user/post/${post._id}`)}
                     className="text-danger pt-2 h5 px-2 mx-auto"
                   />
-                  {page === "PostList" && (
-                    <DeleteOutlined
-                      onClick={() => handleDelete(post)}
-                      className="text-danger pt-2 h5 px-2"
-                    />
-                  )}
+                  <DeleteOutlined
+                    onClick={() => handleDelete(post)}
+                    className="text-danger pt-2 h5 px-2"
+                  />
                 </>
               )}
             </div>
@@ -100,7 +98,10 @@ const Post = ({
               style={{ maxHeight: "125px", overflow: "scroll" }}
             >
               {post.comments.slice(0, commentsCount).map((comment) => (
-                <li className="list-group-item d-flex justify-content-between align-items-start">
+                <li
+                  key={comment._id}
+                  className="list-group-item d-flex justify-content-between align-items-start"
+                >
                   <div className="ms-2 me-auto">
                     <div>
                       <Avatar
@@ -116,8 +117,7 @@ const Post = ({
                     {moment(comment.created).fromNow()}
                     {state &&
                       state.user &&
-                      state.user._id === comment.postedBy._id &&
-                      page === "id" && (
+                      state.user._id === comment.postedBy._id && (
                         <div className="ml-auto mt-1">
                           <DeleteOutlined
                             onClick={() => removeComment(post._id, comment)}

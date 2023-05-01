@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { Modal } from "antd";
+import { Modal, Pagination } from "antd";
 
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
@@ -26,6 +26,9 @@ const Dashboard = () => {
   const [comment, setComment] = useState("");
   const [visible, setVisible] = useState(false);
   const [currentPost, setCurrentPost] = useState({});
+  // pagination
+  const [totalPosts, setTotalPosts] = useState(0);
+  const [page, setPage] = useState(1);
 
   // route
   const router = useRouter();
@@ -35,11 +38,19 @@ const Dashboard = () => {
       newsFeed();
       findPeople();
     }
-  }, [state && state.token]);
+  }, [state && state.token, page]);
+
+  useEffect(() => {
+    try {
+      axios.get("/total-posts").then(({ data }) => setTotalPosts(data));
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   const newsFeed = async () => {
     try {
-      const { data } = await axios.get("/news-feed");
+      const { data } = await axios.get(`/news-feed/${page}`);
       // console.log("User posts =>", data);
       setPosts(data);
     } catch (err) {
@@ -66,6 +77,7 @@ const Dashboard = () => {
       if (data.error) {
         toast.error(data.error);
       } else {
+        setPage(1);
         newsFeed();
         toast.success("post created");
         setContent("");
@@ -179,7 +191,19 @@ const Dashboard = () => {
     }
   };
 
-  const removeComment = async () => {};
+  const removeComment = async (postId, comment) => {
+    let answer = window.confirm("Are you sure?");
+    if (!answer) return;
+
+    try {
+      const { data } = await axios.put("/remove-comment", {
+        postId,
+        comment,
+      });
+      console.log("Comment removed =>", data);
+      newsFeed();
+    } catch (err) {}
+  };
 
   return (
     <UserRoute>
@@ -207,6 +231,13 @@ const Dashboard = () => {
               handleLike={handleLike}
               handleUnlike={handleUnlike}
               handleComment={handleComment}
+              removeComment={removeComment}
+            />
+
+            <Pagination
+              current={page}
+              total={(totalPosts / 2) * 10}
+              onChange={(value) => setPage(value)}
             />
           </div>
 

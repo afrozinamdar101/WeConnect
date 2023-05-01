@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Link from "next/Link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import AuthForm from "../components/forms/AuthForm";
