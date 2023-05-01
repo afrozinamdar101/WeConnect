@@ -26,6 +26,20 @@ const PostComments = () => {
     }
   };
 
+  const removeComment = async (postId, comment) => {
+    let answer = window.confirm("Are you sure?");
+    if (!answer) return;
+
+    try {
+      const { data } = await axios.put("/remove-comment", {
+        postId,
+        comment,
+      });
+      console.log("Comment removed =>", data);
+      fetchPost();
+    } catch (err) {}
+  };
+
   return (
     <div className="container-fluid">
       <div className="row py-5 text-light bg-default-image">
@@ -35,7 +49,12 @@ const PostComments = () => {
       </div>
 
       <div className="container col-md-8 offset-md-2 pt-5">
-        <Post post={post} commentsCount={100} />
+        <Post
+          post={post}
+          commentsCount={100}
+          removeComment={removeComment}
+          page="id"
+        />
       </div>
 
       <Link

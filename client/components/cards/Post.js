@@ -22,7 +22,9 @@ const Post = ({
   handleLike,
   handleUnlike,
   handleComment,
-  commentsCount = 2,
+  commentsCount = 3,
+  removeComment,
+  page,
 }) => {
   const [state] = useContext(UserContext);
   const router = useRouter();
@@ -63,7 +65,7 @@ const Post = ({
                 {post.likes.length} Like
               </div>
               <CommentOutlined
-                onClick={() => handleComment(post)}
+                onClick={() => page === "PostList" && handleComment(post)}
                 className="text-danger pt-2 h5 px-2"
               />
               <div className="pt-2 pl-3">
@@ -81,17 +83,22 @@ const Post = ({
                     onClick={() => router.push(`/user/post/${post._id}`)}
                     className="text-danger pt-2 h5 px-2 mx-auto"
                   />
-                  <DeleteOutlined
-                    onClick={() => handleDelete(post)}
-                    className="text-danger pt-2 h5 px-2"
-                  />
+                  {page === "PostList" && (
+                    <DeleteOutlined
+                      onClick={() => handleDelete(post)}
+                      className="text-danger pt-2 h5 px-2"
+                    />
+                  )}
                 </>
               )}
             </div>
           </div>
 
           {post.comments && post.comments.length > 0 && (
-            <ol className="list-group">
+            <ol
+              className="list-group"
+              style={{ maxHeight: "125px", overflow: "scroll" }}
+            >
               {post.comments.slice(0, commentsCount).map((comment) => (
                 <li className="list-group-item d-flex justify-content-between align-items-start">
                   <div className="ms-2 me-auto">
@@ -107,6 +114,17 @@ const Post = ({
                   </div>
                   <span className="badge round-pill text-muted">
                     {moment(comment.created).fromNow()}
+                    {state &&
+                      state.user &&
+                      state.user._id === comment.postedBy._id &&
+                      page === "id" && (
+                        <div className="ml-auto mt-1">
+                          <DeleteOutlined
+                            onClick={() => removeComment(post._id, comment)}
+                            className="pl-2 text-danger"
+                          />
+                        </div>
+                      )}
                   </span>
                 </li>
               ))}

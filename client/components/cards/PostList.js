@@ -37,6 +37,7 @@ const PostList = ({
             handleLike={handleLike}
             handleUnlike={handleUnlike}
             handleComment={handleComment}
+            page="PostList"
           />
         ))}
     </>
