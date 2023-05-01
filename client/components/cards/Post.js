@@ -83,12 +83,16 @@ const Post = ({
                     onClick={() => router.push(`/user/post/${post._id}`)}
                     className="text-danger pt-2 h5 px-2 mx-auto"
                   />
-                  {page !== "id" && (
+                  <DeleteOutlined
+                    onClick={() => handleDelete(post)}
+                    className="text-danger pt-2 h5 px-2"
+                  />
+                  {/* {page !== "id" && (
                     <DeleteOutlined
                       onClick={() => handleDelete(post)}
                       className="text-danger pt-2 h5 px-2"
                     />
-                  )}
+                  )} */}
                 </>
               )}
             </div>
