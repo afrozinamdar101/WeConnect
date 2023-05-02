@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Modal } from "antd";
+import { Avatar, Modal } from "antd";
 import Link from "next/Link";
 import { useRouter } from "next/router";
 import { CameraOutlined, LoadingOutlined } from "@ant-design/icons";
