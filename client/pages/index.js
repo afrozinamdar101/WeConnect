@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
@@ -11,11 +11,24 @@ import PostPublic from "../components/cards/PostPublic";
 const socket = io(process.env.NEXT_PUBLIC_SOCKETIO, {
   reconnection: true,
 });
+
 const Home = ({ posts }) => {
   const [state, setState] = useContext(UserContext);
 
+  const [newsFeed, setNewsFeed] = useState([]);
+
+  // useEffect(() => {
+  //   // console.log("Socket.io on join =>", socket);
+  //   socket.on("receive-message", (receivedMessage) => {
+  //     alert(receivedMessage);
+  //   });
+  // }, []);
+
   useEffect(() => {
-    console.log("Socket.io on join =>", socket);
+    // console.log("Socket.io on join =>", socket);
+    socket.on("new-post", (newPost) => {
+      setNewsFeed([newPost, ...posts]);
+    });
   }, []);
 
   const head = () => {
@@ -35,13 +48,25 @@ const Home = ({ posts }) => {
       />
     </Head>;
   };
+
+  // this collection holds posts
+  const collection = newsFeed.length > 0 ? newsFeed : posts;
+
   return (
     <>
       {head()}
       <ParallaxBG url="/images/default.jpg" />
+
       <div className="container">
+        {/* <button
+          onClick={() => {
+            socket.emit("send-message", "Hello from client");
+          }}
+        >
+          Send message
+        </button> */}
         <div className="row pt-5">
-          {posts.map((post) => (
+          {collection.map((post) => (
             <div key={post._id} className="col-md-4">
               <Link
                 href={`/post/view/${post._id}`}

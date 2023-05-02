@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { Modal, Pagination } from "antd";
+import io from "socket.io-client";
 
 import { UserContext } from "../../context";
 import UserRoute from "../../components/routes/UserRoute";
@@ -12,6 +13,10 @@ import PostList from "../../components/cards/PostList";
 import People from "../../components/cards/People";
 import CommentForm from "../../components/forms/CommentForm";
 import Search from "../../components/Search";
+
+const socket = io(process.env.NEXT_PUBLIC_SOCKETIO, {
+  reconnection: true,
+});
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
@@ -73,7 +78,7 @@ const Dashboard = () => {
     // console.log("Content =>", content);
     try {
       const { data } = await axios.post("/create-post", { content, image });
-      console.log("Create post response => ", data);
+      // console.log("Create post response => ", data);
 
       if (data.error) {
         toast.error(data.error);
@@ -83,6 +88,8 @@ const Dashboard = () => {
         toast.success("post created");
         setContent("");
         setImage({});
+        // emit using socket io
+        socket.emit("new-post", data);
       }
     } catch (err) {
       console.log(err);

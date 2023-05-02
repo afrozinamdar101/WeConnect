@@ -45,8 +45,20 @@ app.use(
 app.use("/api", [authRoutes, postRoutes]);
 
 // socket io
+// socketio.on("connect", (socket) => {
+//   // console.log("Socket.io =>", socket.id);
+//   socket.on("send-message", (message) => {
+//     // console.log("new message received from client =>", message);
+//     socket.broadcast.emit("receive-message", message);
+//   });
+// });
+
 socketio.on("connect", (socket) => {
-  console.log("Socket.io =>", socket.id);
+  // console.log("Socket.io =>", socket.id);
+  socket.on("new-post", (newPost) => {
+    // console.log("new post received from client =>", newPost);
+    socket.broadcast.emit("new-post", newPost);
+  });
 });
 
 app.post("/api/register", (req, res) => {
