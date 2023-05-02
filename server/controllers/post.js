@@ -197,3 +197,29 @@ export const totalPosts = async (req, res) => {
     return res.json({ error: "Error. Please try again." });
   }
 };
+
+export const posts = async (req, res) => {
+  try {
+    const posts = await Post.find()
+      .populate("postedBy", "_id name image")
+      .populate("comments.postedBy", "_id name image")
+      .sort({ createdAt: -1 })
+      .limit(12);
+    return res.json(posts);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};
+
+export const getPost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params._id)
+      .populate("postedBy", "_id name image")
+      .populate("comments.postedBy", "_id name image");
+    return res.json(post);
+  } catch (err) {
+    console.log(err);
+    return res.json({ error: "Error. Please try again." });
+  }
+};

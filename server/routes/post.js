@@ -15,6 +15,8 @@ import {
   addComment,
   removeComment,
   totalPosts,
+  posts,
+  getPost,
 } from "../controllers/post.js";
 
 const router = express.Router();
@@ -41,5 +43,7 @@ router.put("/unlike-post", requireSignIn, unlikePost);
 router.put("/add-comment", requireSignIn, addComment);
 router.put("/remove-comment", requireSignIn, removeComment);
 router.get("/total-posts", totalPosts);
+router.get("/posts", posts);
+router.get("/post/:_id", getPost);
 
 export default router;
