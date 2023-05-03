@@ -13,6 +13,7 @@ import postRoutes from "./routes/post.js";
 const app = express();
 const http = createServer(app);
 const socketio = new Server(http, {
+  path: "/socket.io",
   cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],

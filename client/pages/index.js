@@ -8,9 +8,13 @@ import { UserContext } from "../context";
 import ParallaxBG from "../components/cards/ParallaxBG";
 import PostPublic from "../components/cards/PostPublic";
 
-const socket = io(process.env.NEXT_PUBLIC_SOCKETIO, {
-  reconnection: true,
-});
+const socket = io(
+  process.env.NEXT_PUBLIC_SOCKETIO,
+  { path: "/socket.io" },
+  {
+    reconnection: true,
+  }
+);
 
 const Home = ({ posts }) => {
   const [state, setState] = useContext(UserContext);

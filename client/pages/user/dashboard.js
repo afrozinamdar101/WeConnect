@@ -14,9 +14,13 @@ import People from "../../components/cards/People";
 import CommentForm from "../../components/forms/CommentForm";
 import Search from "../../components/Search";
 
-const socket = io(process.env.NEXT_PUBLIC_SOCKETIO, {
-  reconnection: true,
-});
+const socket = io(
+  process.env.NEXT_PUBLIC_SOCKETIO,
+  { path: "/socket.io" },
+  {
+    reconnection: true,
+  }
+);
 
 const Dashboard = () => {
   const [state, setState] = useContext(UserContext);
