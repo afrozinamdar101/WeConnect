@@ -5,29 +5,29 @@ import { SyncOutlined } from "@ant-design/icons";
 
 import { UserContext } from "../../context";
 
-const UserRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
   const [ok, setOk] = useState(false);
   const router = useRouter();
   const [state] = useContext(UserContext);
 
   useEffect(() => {
-    if (state && state.token) getCurrentUser();
+    if (state && state.token) getCurrentAdmin();
   }, [state && state.token]);
 
-  const getCurrentUser = async () => {
+  const getCurrentAdmin = async () => {
     try {
-      const { data } = await axios.get(`/current-user`);
+      const { data } = await axios.get(`/current-admin`);
 
       if (data.ok) setOk(true);
     } catch (err) {
-      router.push("/login");
+      router.push("/");
     }
   };
 
   process.browser &&
     state === null &&
     setTimeout(() => {
-      getCurrentUser();
+      getCurrentAdmin();
     }, 1000);
 
   return !ok ? (
@@ -40,4 +40,4 @@ const UserRoute = ({ children }) => {
   );
 };
 
-export default UserRoute;
+export default AdminRoute;

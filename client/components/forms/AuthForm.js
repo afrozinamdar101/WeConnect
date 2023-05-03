@@ -12,8 +12,42 @@ const AuthForm = ({
   setSecret,
   loading,
   page,
+  username,
+  setUsername,
+  about,
+  setAbout,
+  profileUpdate,
 }) => (
   <form onSubmit={handleSubmit}>
+    {profileUpdate && (
+      <>
+        <div className="form-group p-2">
+          <small>
+            <label className="text-muted">Username</label>
+          </small>
+          <input
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            type="text"
+            className="form-control"
+            placeholder="Enter name"
+          />
+        </div>
+
+        <div className="form-group p-2">
+          <small>
+            <label className="text-muted">About</label>
+          </small>
+          <input
+            onChange={(e) => setAbout(e.target.value)}
+            value={about}
+            type="text"
+            className="form-control"
+            placeholder="Write about yourself..."
+          />
+        </div>
+      </>
+    )}
     {page !== "login" && (
       <div className="form-group p-2">
         <small>
@@ -34,6 +68,7 @@ const AuthForm = ({
         <label className="text-muted">Email adddress</label>
       </small>
       <input
+        disabled={profileUpdate}
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         type="email"
@@ -87,14 +122,18 @@ const AuthForm = ({
     <div className="form-group p-2">
       <button
         disabled={
-          page !== "login"
-            ? !name || !email || !password || !secret
-            : !email || !password
+          profileUpdate
+            ? loading
+            : page !== "login"
+            ? !name || !email || !password || !secret || loading
+            : !email || !password || loading
         }
         className="btn btn-primary col-12"
       >
         {loading ? (
           <SyncOutlined spin className="py-1" />
+        ) : profileUpdate ? (
+          "Update"
         ) : page !== "login" ? (
           "Submit"
         ) : (

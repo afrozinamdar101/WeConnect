@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Link from "next/Link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import AuthForm from "../components/forms/AuthForm";
@@ -21,21 +21,24 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/login`,
-        {
-          email,
-          password,
-        }
-      );
-      // update context
-      setState({
-        user: data.user,
-        token: data.token,
+      const { data } = await axios.post(`/login`, {
+        email,
+        password,
       });
-      // save in local storage
-      window.localStorage.setItem("auth", JSON.stringify(data));
-      router.push("/");
+
+      if (data.error) {
+        toast.error(data.error);
+        setLoading(false);
+      } else {
+        // update context
+        setState({
+          user: data.user,
+          token: data.token,
+        });
+        // save in local storage
+        window.localStorage.setItem("auth", JSON.stringify(data));
+        router.push("/user/dashboard");
+      }
     } catch (err) {
       toast(err.response.data);
       setLoading(false);
@@ -43,7 +46,7 @@ const Login = () => {
   };
 
   // state?.token && router.push("/");
-  if (state && state.token) router.push("/");
+  if (state && state.token) router.push("/user/dashboard");
 
   return (
     <div className="container-fluid">
@@ -72,6 +75,16 @@ const Login = () => {
           <p className="text-center">
             Not yet registered?
             <Link href="/register"> Register</Link>
+          </p>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col">
+          <p className="text-center">
+            <Link href="/forgot-password" className="text-danger">
+              Forgot Password
+            </Link>
           </p>
         </div>
       </div>

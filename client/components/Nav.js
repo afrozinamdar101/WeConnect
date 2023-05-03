@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import Link from "next/Link";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { Avatar } from "antd";
 
 import { UserContext } from "../context";
 
@@ -31,29 +32,71 @@ const Nav = () => {
           currentLink === "/" && "active"
         }`}
       >
+        <Avatar src="/images/logo.png" />
         WeConnect
       </Link>
 
       {state !== null ? (
         <>
-          <Link
-            href="/user/dashboard"
-            className={`nav-link text-light ${
-              currentLink === "/user/dashboard" && "active"
-            }`}
-          >
-            {state.user.name}
-          </Link>
+          <div className="dropdown">
+            <a
+              className="btn dropdown-toggle text-light"
+              role="button"
+              id="dropdownMenuLink"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {state && state.user && state.user.name}
+            </a>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li>
+                <Link
+                  href="/user/dashboard"
+                  className={`nav-link drpodown-item ${
+                    currentLink === "/user/dashboard" && "active"
+                  }`}
+                >
+                  Dashboard
+                </Link>
+              </li>
 
-          <Link
-            href="/logout"
-            onClick={logout}
-            className={`nav-link text-light ${
-              currentLink === "/logout" && "active"
-            }`}
-          >
-            Logout
-          </Link>
+              <li>
+                <Link
+                  href="/user/profile/update"
+                  className={`nav-link drpodown-item ${
+                    currentLink === "/user/profile/update" && "active"
+                  }`}
+                >
+                  Profile
+                </Link>
+              </li>
+
+              {state.user.role === "Admin" && (
+                <li>
+                  <Link
+                    href="/admin"
+                    className={`nav-link dropdown-item ${
+                      currentLink === "/admin" && "active"
+                    }`}
+                  >
+                    Admin
+                  </Link>
+                </li>
+              )}
+
+              <li>
+                <Link
+                  href="/logout"
+                  onClick={logout}
+                  className={`nav-link dropdown-item ${
+                    currentLink === "/logout" && "active"
+                  }`}
+                >
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          </div>
         </>
       ) : (
         <>
