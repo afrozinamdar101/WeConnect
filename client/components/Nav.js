@@ -59,6 +59,7 @@ const Nav = () => {
                   Dashboard
                 </Link>
               </li>
+
               <li>
                 <Link
                   href="/user/profile/update"
@@ -69,6 +70,20 @@ const Nav = () => {
                   Profile
                 </Link>
               </li>
+
+              {state.user.role === "Admin" && (
+                <li>
+                  <Link
+                    href="/admin"
+                    className={`nav-link dropdown-item ${
+                      currentLink === "/admin" && "active"
+                    }`}
+                  >
+                    Admin
+                  </Link>
+                </li>
+              )}
+
               <li>
                 <Link
                   href="/logout"

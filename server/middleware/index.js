@@ -1,6 +1,7 @@
 import expressJwt from "express-jwt";
 import dotenv from "dotenv";
 import Post from "../models/post.js";
+import User from "../models/user.js";
 
 dotenv.config();
 
@@ -18,6 +19,19 @@ export const canEditDeletePost = async (req, res, next) => {
     } else {
       next();
     }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const isAdmin = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (user.role !== "Admin") {
+      return res.status(400).send("Unauthorized. User is not an Admin");
+    }
+    next();
   } catch (err) {
     console.log(err);
   }
