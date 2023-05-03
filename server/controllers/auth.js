@@ -12,6 +12,14 @@ export const register = async (req, res) => {
   if (!name) {
     return res.json({ error: "Name is required" });
   }
+
+  if (!email.endsWith("sjsu.edu")) {
+    return res.json({
+      error:
+        "Only users with sjsu domain can register. Please try again with email having sjsu domain",
+    });
+  }
+
   if (!password || password.length < 6) {
     return res.json({
       error: "Password is required and should be at least 6 characters long",
