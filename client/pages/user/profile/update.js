@@ -93,72 +93,74 @@ const ProfileUpdate = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row py-5 text-light bg-default-image">
-        <div className="col text-center">
-          <h1>Profile</h1>
+    <div className="dash_bg">
+      <div className="container-fluid" style={{ maxWidth: "1200px" }}>
+        <div className="row py-5 text-light">
+          <div className="col text-center">
+            <h1>Profile</h1>
+          </div>
         </div>
-      </div>
 
-      <div className="row py-5">
-        <div className="col-md-6 offset-md-3">
-          {/* upload image */}
-          <label className="d-flex justify-content-center h5">
-            {image && image.url ? (
-              <Avatar size={30} src={image.url} className="mt-2" />
-            ) : uploading ? (
-              <LoadingOutlined className="mt-2" />
-            ) : (
-              <CameraOutlined className="mt-2" />
-            )}
-            <input
-              onChange={handleImage}
-              type="file"
-              accept="images/*"
-              hidden
+        <div className="row py-5">
+          <div className="col-md-6 offset-md-3">
+            {/* upload image */}
+            <label className="d-flex justify-content-center h5">
+              {image && image.url ? (
+                <Avatar size={30} src={image.url} className="mt-2" />
+              ) : uploading ? (
+                <LoadingOutlined className="mt-2" />
+              ) : (
+                <CameraOutlined className="mt-2" />
+              )}
+              <input
+                onChange={handleImage}
+                type="file"
+                accept="images/*"
+                hidden
+              />
+            </label>
+            <AuthForm
+              profileUpdate={true}
+              username={username}
+              setUsername={setUsername}
+              about={about}
+              setAbout={setAbout}
+              handleSubmit={handleSubmit}
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              secret={secret}
+              setSecret={setSecret}
+              loading={loading}
             />
-          </label>
-          <AuthForm
-            profileUpdate={true}
-            username={username}
-            setUsername={setUsername}
-            about={about}
-            setAbout={setAbout}
-            handleSubmit={handleSubmit}
-            name={name}
-            setName={setName}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            secret={secret}
-            setSecret={setSecret}
-            loading={loading}
-          />
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col">
-          <Modal
-            title="Congratulations!"
-            open={ok}
-            onCancel={() => setOk(false)}
-            footer={null}
-          >
-            <p>You have successfully updated your profile.</p>
-          </Modal>
+          </div>
         </div>
 
         <div className="row">
           <div className="col">
-            <p className="text-center">
-              Already registered?
-              <Link href="/login" style={{ textDecoration: "none" }}>
-                {" "}
-                Login
-              </Link>
-            </p>
+            <Modal
+              title="Congratulations!"
+              open={ok}
+              onCancel={() => setOk(false)}
+              footer={null}
+            >
+              <p>You have successfully updated your profile.</p>
+            </Modal>
+          </div>
+
+          <div className="row">
+            <div className="col">
+              <p className="text-center" style={{color: "white"}}>
+                Already registered?
+                <Link href="/login" style={{ textDecoration: "none" }}>
+                  {" "}
+                  Login
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

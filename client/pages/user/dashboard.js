@@ -219,16 +219,19 @@ const Dashboard = () => {
 
   return (
     <UserRoute>
-      <div className="container-fluid">
-        <div className="row py-5 text-light bg-default-image">
+    <div className="dash_bg">
+      <div className="container-fluid" style={{ maxWidth: "1200px" }}>
+        <div className="container-fluid" style={{backgroundColor: "rgba(255, 255, 255, 0)", textShadow: '2px 2px 8px #000', borderRadius:"10px", width: "30%", height: "100px" }}>
+        <div className="row py-3 text-light">
           <div className="col text-center">
             <h1>News Feed</h1>
           </div>
         </div>
+        </div>
 
         <div className="row py-5">
           <div className="col md-8">
-            <PostForm
+            <PostForm 
               content={content}
               setContent={setContent}
               postSubmit={postSubmit}
@@ -250,7 +253,8 @@ const Dashboard = () => {
               current={page}
               total={(totalPosts / 2) * 10}
               onChange={(value) => setPage(value)}
-              className="pb-5"
+              className="pt-2 pb-2"
+              style={{backgroundColor: "blue", border: "2px solid gold" ,borderRadius : "10px"}}
             />
           </div>
 
@@ -263,12 +267,12 @@ const Dashboard = () => {
               <Link
                 href={`/user/following`}
                 className="h6"
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: "none", color: "white", textShadow: '1px 1px 8px #000' }}
               >
                 {state.user.following.length} Following
               </Link>
             )}
-            <People people={people} handleFollow={handleFollow} />
+            <People people={people} handleFollow={handleFollow}  />
           </div>
         </div>
 
@@ -284,6 +288,7 @@ const Dashboard = () => {
             addComment={addComment}
           />
         </Modal>
+      </div>
       </div>
     </UserRoute>
   );

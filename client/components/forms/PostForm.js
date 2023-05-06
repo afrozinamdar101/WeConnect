@@ -16,15 +16,16 @@ const PostForm = ({
   image,
 }) => {
   return (
-    <div className="card">
-      <div className="card-body pb-3">
-        <form className="form-group">
+    <div className="card" style={{background:"blue" ,color: "white", borderColor: 'gold',borderWidth: '4px', borderRadius: "35px" }}>
+      <div className="card-body pb-3" >
+        <form className="form-group" >
           <ReactQuill
             theme="snow"
             value={content}
             onChange={(e) => setContent(e)}
             className="form-control"
             placeholder="Write something..."
+            style={{borderRadius: "10px", backgroundColor: "#FDFFD6"}}
           />
         </form>
       </div>
@@ -33,7 +34,7 @@ const PostForm = ({
         <button
           disabled={!content}
           onClick={postSubmit}
-          className="btn btn-primary btn-sm mt-1"
+          className="btn btn-primary btn-sm mt-1" style={{ color: "gold", borderColor: "gold", fontWeight: "bold", borderRadius: "15px" ,fontSize: "15px" }}
         >
           Post
         </button>
@@ -44,7 +45,7 @@ const PostForm = ({
           ) : uploading ? (
             <LoadingOutlined className="mt-2" />
           ) : (
-            <CameraOutlined className="mt-2" />
+            <CameraOutlined className="mt-2 pointer" style={{ color: 'gold', fontSize: '2em'}} />
           )}
           <input onChange={handleImage} type="file" accept="images/*" hidden />
         </label>

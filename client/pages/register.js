@@ -44,6 +44,7 @@ const Register = () => {
       }
     } catch (err) {
       toast(err.response.data);
+      //console.log(err);
       setLoading(false);
     }
   };

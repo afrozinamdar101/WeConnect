@@ -87,7 +87,9 @@ const Following = () => {
         href="/user/dashboard"
         className="d-flex justify-content-center pt-5"
       >
+        <div className="follow_bg pb-2" >
         <RollbackOutlined />
+        </div>
       </Link>
     </div>
   );

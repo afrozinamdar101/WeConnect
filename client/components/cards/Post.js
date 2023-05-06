@@ -57,10 +57,10 @@ const Post = ({
   return (
     <>
       {post && post.postedBy && (
-        <div key={post._id} className="card mb-5">
+        <div key={post._id} className="card mb-5"style={{background:"blue" ,color: "white", borderColor: 'gold',borderWidth: '4px', borderRadius: "35px" }}>
           <div className="card-header">
             {/* <Avatar size={40}>{post.postedBy.name[0]}</Avatar>{" "} */}
-            <Avatar size={40} src={imageSource(post.postedBy)} />
+            <Avatar size={40} src={imageSource(post.postedBy)} style={{ border: '3px solid gold' }}/>
             <span className="pt-2 ml-3" style={{ marginLeft: "1rem" }}>
               {post.postedBy.name}
             </span>
@@ -78,12 +78,14 @@ const Post = ({
               post.likes.includes(state.user._id) ? (
                 <HeartFilled
                   onClick={() => handleUnlike(post._id)}
-                  className="text-danger pt-2 h5 px-2"
+                  className="pt-2 h5 px-2"
+                  style={{ color: 'gold' }}
                 />
               ) : (
                 <HeartOutlined
                   onClick={() => handleLike(post._id)}
-                  className="text-danger pt-2 h5 px-2"
+                  className=" pt-2 h5 px-2"
+                  style={{ color: 'gold'}}
                 />
               )}
               <div className="pt-2 pl-3" style={{ marginRight: "1rem" }}>
@@ -91,12 +93,12 @@ const Post = ({
               </div>
               <CommentOutlined
                 onClick={() => handleComment(post)}
-                className="text-danger pt-2 h5 px-2"
+                className=" pt-2 h5 px-2" style={{ color: 'gold' }}
               />
               <div className="pt-2 pl-3">
                 <Link
                   href={`/post/${post._id}`}
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none", color: 'white' }}
                 >
                   {post.comments.length} Comments
                 </Link>
@@ -106,11 +108,11 @@ const Post = ({
                 <>
                   <EditOutlined
                     onClick={() => router.push(`/user/post/${post._id}`)}
-                    className="text-danger pt-2 h5 px-2 mx-auto"
+                    className="pt-2 h5 px-2 mx-auto"style={{ color: 'gold' }}
                   />
                   <DeleteOutlined
                     onClick={() => handleDelete(post)}
-                    className="text-danger pt-2 h5 px-2"
+                    className="pt-2 h5 px-2" style={{ color: 'gold' }}
                   />
                   {/* {page !== "id" && (
                     <DeleteOutlined
