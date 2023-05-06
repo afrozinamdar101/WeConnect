@@ -32,7 +32,7 @@ const Nav = () => {
           currentLink === "/" && "active"
         }`}
       >
-        <Avatar src="/images/logo.png" />
+        <Avatar src="/images/logo_av.png" className="avatar"/>
         WeConnect
       </Link>
 

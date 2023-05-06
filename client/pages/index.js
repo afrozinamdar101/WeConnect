@@ -62,6 +62,7 @@ const Home = ({ posts }) => {
       <ParallaxBG url="/images/default.jpg" />
 
       <div className="container">
+        
         {/* <button
           onClick={() => {
             socket.emit("send-message", "Hello from client");
