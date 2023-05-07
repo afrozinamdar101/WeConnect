@@ -128,7 +128,7 @@ const Post = ({
           {post.comments && post.comments.length > 0 && (
             <ol
               className="list-group"
-              style={{ maxHeight: "125px", overflow: "scroll" }}
+              style={{ maxHeight: "125px", overflow: "scroll" ,borderRadius: "30px" }}
             >
               {post.comments.slice(0, commentsCount).map((comment) => (
                 <li
@@ -154,7 +154,7 @@ const Post = ({
                         <div className="ml-auto mt-1">
                           <DeleteOutlined
                             onClick={() => removeComment(post._id, comment)}
-                            className="pl-2 text-danger"
+                            className="pl-2 " style={{color:"blue"}}
                           />
                         </div>
                       )}

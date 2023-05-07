@@ -224,7 +224,8 @@ const Dashboard = () => {
         <div className="container-fluid" style={{backgroundColor: "rgba(255, 255, 255, 0)", textShadow: '2px 2px 8px #000', borderRadius:"10px", width: "30%", height: "100px" }}>
         <div className="row py-3 text-light">
           <div className="col text-center">
-            <h1>News Feed</h1>
+          
+            <h1>Spartan Feed</h1>
           </div>
         </div>
         </div>

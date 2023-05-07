@@ -50,7 +50,7 @@ const Login = () => {
 
   return (
     <div className="Background">
-      <img src="/images/logo.png" alt="logo_big" className="Logo_1" />
+      <img src="/images/logo.png" alt="logo_big" style={{width:"250px"}} />
       <div className="container-fluid">
       
         <div className="row text-light">

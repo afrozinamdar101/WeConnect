@@ -59,38 +59,40 @@ const Following = () => {
   };
 
   return (
-    <div className="row col-md-6 offset-md-3">
-      <List
-        itemLayout="horizontal"
-        dataSource={people}
-        renderItem={(user) => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar src={imageSource(user)} />}
-              title={
-                <div className="d-flex justify-content-between">
-                  {user.username}{" "}
-                  <span
-                    onClick={() => handleUnfollow(user)}
-                    className="text-primary pointer"
-                  >
-                    Unfollow
-                  </span>
-                </div>
-              }
-            ></List.Item.Meta>
-          </List.Item>
-        )}
-      />
+    <div className="dash_bg" style={{ maxWidth: "auto", backgroundSize: "cover" }}>
+      <div className="row col-md-6 ">
+        <List
+          itemLayout="horizontal"
+          dataSource={people}
+          renderItem={(user) => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar size={60} src={imageSource(user)} style={{border: "2px solid gold"}}/>}
+                title={
+                  <div className="d-flex justify-content-between" style={{color: "gold"}}>
+                    {user.username}{" "}
+                    <span
+                      onClick={() => handleUnfollow(user)}
+                      className="follow_bg pointer"style={{ border: '3px solid gold' ,color: "white"}}
+                    >
+                      Unfollow
+                    </span>
+                  </div>
+                }
+              ></List.Item.Meta>
+            </List.Item>
+          )}
+        />
 
-      <Link
-        href="/user/dashboard"
-        className="d-flex justify-content-center pt-5"
-      >
-        <div className="follow_bg pb-2" >
-        <RollbackOutlined />
-        </div>
-      </Link>
+        <Link
+          href="/user/dashboard"
+          className="d-flex justify-content-center pt-5"
+        >
+          <div className="follow_bg pb-2 m" style={{ marginBottom: '1000px' }} >
+          <RollbackOutlined />
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };

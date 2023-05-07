@@ -56,10 +56,10 @@ const PostPublic = ({
   return (
     <>
       {post && post.postedBy && (
-        <div key={post._id} className="card mb-5">
+        <div key={post._id} className="card mb-5"style={{background:"blue" ,color: "white", borderColor: 'gold',borderWidth: '4px', borderRadius: "35px" }}>
           <div className="card-header">
             {/* <Avatar size={40}>{post.postedBy.name[0]}</Avatar>{" "} */}
-            <Avatar size={40} src={imageSource(post.postedBy)} />
+            <Avatar size={40} src={imageSource(post.postedBy)} style={{ border: '3px solid gold' }}/>
             <span className="pt-2 ml-3" style={{ marginLeft: "1rem" }}>
               {post.postedBy.name}
             </span>
@@ -75,34 +75,35 @@ const PostPublic = ({
               state.user &&
               post.likes &&
               post.likes.includes(state.user._id) ? (
-                <HeartFilled className="text-danger pt-2 h5 px-2" />
+                <HeartFilled className="pt-2 h5 px-2" style={{ color: 'gold' }} />
               ) : (
-                <HeartOutlined className="text-danger pt-2 h5 px-2" />
+                <HeartOutlined className=" pt-2 h5 px-2" style={{ color: 'gold' }} />
               )}
               <div className="pt-2 pl-3" style={{ marginRight: "1rem" }}>
                 {post.likes.length} Like
               </div>
-              <CommentOutlined className="text-danger pt-2 h5 px-2" />
-              <div className="pt-2 pl-3">{post.comments.length} Comments</div>
+              <CommentOutlined className=" pt-2 h5 px-2" style={{ color: 'gold' }} />
+              <div className="pt-2 pl-3" >{post.comments.length} Comments</div>
             </div>
           </div>
 
           {post.comments && post.comments.length > 0 && (
             <ol
               className="list-group"
-              style={{ maxHeight: "125px", overflow: "scroll" }}
+              style={{ maxHeight: "125px", overflow: "scroll" ,borderRadius: "30px"}}
             >
               {post.comments.slice(0, commentsCount).map((comment) => (
                 <li
                   key={comment._id}
                   className="list-group-item d-flex justify-content-between align-items-start"
                 >
-                  <div className="ms-2 me-auto">
+                  <div className="ms-2 me-auto" >
                     <div>
                       <Avatar
                         size={20}
                         className="mb-1 mr-3"
                         src={imageSource(comment.postedBy)}
+                        style={{ border: '3px solid gold' }}
                       />{" "}
                       {comment.postedBy.name}
                     </div>

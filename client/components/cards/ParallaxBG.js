@@ -1,3 +1,4 @@
+import { BorderBottomOutlined } from "@ant-design/icons";
 import { useContext } from "react";
 
 const ParallaxBG = ({ url, children = "WeConnect" }) => {
@@ -10,8 +11,11 @@ const ParallaxBG = ({ url, children = "WeConnect" }) => {
         padding: "100px 0px 75px 0px",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        backgroundPosition: "center center",
+        backgroundPosition: "center ",
         display: "block",
+        maxWidth: "2000px",
+        borderBottom: "5px solid gold"
+       
       }}
     >
       <div className="Logo">
