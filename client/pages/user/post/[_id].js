@@ -74,15 +74,16 @@ const EditPost = () => {
 
   return (
     <UserRoute>
+      <div className="dash_bg">
       <div className="container-fluid">
-        <div className="row py-5 text-light bg-default-image">
+        <div className="row py-5 text-light">
           <div className="col text-center">
-            <h1>News Feed</h1>
+            <h1>Spartan Feed</h1>
           </div>
         </div>
 
         <div className="row py-3">
-          <div className="col-md-8 offset-md-2">
+          <div className="col-md-8 offset-md-2" style={{ marginBottom: '1000px' }} >
             <PostForm
               content={content}
               setContent={setContent}
@@ -95,6 +96,7 @@ const EditPost = () => {
 
           {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
         </div>
+      </div>
       </div>
     </UserRoute>
   );

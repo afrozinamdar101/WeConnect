@@ -19,12 +19,12 @@ const People = ({ people, handleFollow, handleUnfollow }) => {
         renderItem={(user) => (
           <List.Item>
             <List.Item.Meta
-              avatar={<Avatar src={imageSource(user)} />}
+              avatar={<Avatar size={60} src={imageSource(user)} style={{ border: '3px solid gold' }}/>}
               title={
                 <div className="d-flex justify-content-between">
                   <Link
                     href={`/user/${user.username}`}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none",color: "white", textShadow: '1px 1px 4px #000' }}
                   >
                     {user.username}
                   </Link>
@@ -32,19 +32,23 @@ const People = ({ people, handleFollow, handleUnfollow }) => {
                   state.user &&
                   user.followers &&
                   user.followers.includes(state.user._id) ? (
+                    <div className="follow_bg"style={{ border: '3px solid gold' ,color: "white"}}>
                     <span
                       onClick={() => handleUnfollow(user)}
-                      className="text-primary pointer"
+                      className="pointer" style={{ color: "white" ,fontWeight: "bold" }}
                     >
                       Unfollow
                     </span>
+                    </div>
                   ) : (
+                    <div className="follow_bg"style={{ border: '3px solid gold',color: "white" }}>
                     <span
                       onClick={() => handleFollow(user)}
-                      className="text-primary pointer"
+                      className="pointer" style={{ color: "white",fontWeight: "bold" }}
                     >
                       Follow
                     </span>
+                    </div>
                   )}
                 </div>
               }

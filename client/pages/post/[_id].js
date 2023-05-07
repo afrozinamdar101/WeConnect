@@ -82,10 +82,10 @@ const PostComments = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row py-5 text-light bg-default-image">
+    <div className="dash_bg1">
+      <div className="row py-5 text-light ">
         <div className="col text-center">
-          <h1>News Feed</h1>
+          <h1>Spartan Feed</h1>
         </div>
       </div>
 
@@ -103,7 +103,9 @@ const PostComments = () => {
         href="/user/dashboard"
         className="d-flex justify-content-center pt-5"
       >
+        <div className="follow_bg pb-2 " style={{ marginBottom: '1000px' }} >
         <RollbackOutlined />
+        </div>
       </Link>
 
       <Modal

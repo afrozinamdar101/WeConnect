@@ -82,11 +82,12 @@ const Search = () => {
             className="form-control"
             placeholder="Search Users"
             type="search"
+            style={{ textDecoration: "none",color: "black",border: "2px solid gold", borderRadius: "30px", borderInline:"2px solid blue" }}
           />
         </div>
 
         <div className="col-4">
-          <button className="btn btn-outline-primary col-12" type="submit">
+          <button className="btn btn-outline-primary col-12" type="submit"style={{ textDecoration: "none",color: "white", textShadow: '1px 1px 4px #000',border: "2px solid gold", borderRadius: "30px" }}>
             Search
           </button>
         </div>

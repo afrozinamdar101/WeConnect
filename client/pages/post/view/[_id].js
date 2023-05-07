@@ -1,8 +1,11 @@
 import axios from "axios";
 import Head from "next/head";
+import Link from "next/link";
+import { RollbackOutlined } from "@ant-design/icons";
 
 import ParallaxBG from "../../../components/cards/ParallaxBG";
 import PostPublic from "../../../components/cards/PostPublic";
+
 
 const SinglePost = ({ post }) => {
   const head = () => {
@@ -41,6 +44,14 @@ const SinglePost = ({ post }) => {
             <PostPublic key={post._id} post={post} />
           </div>
         </div>
+        <Link
+        href="/"
+        className="d-flex justify-content-center pt-5"
+      >
+        <div className="follow_bg pb-2 " style={{ marginBottom: '1000px' }} >
+        <RollbackOutlined />
+        </div>
+      </Link>
       </div>
     </>
   );

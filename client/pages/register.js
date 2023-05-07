@@ -44,6 +44,7 @@ const Register = () => {
       }
     } catch (err) {
       toast(err.response.data);
+      //console.log(err);
       setLoading(false);
     }
   };
@@ -52,51 +53,54 @@ const Register = () => {
   if (state && state.token) router.push("/");
 
   return (
-    <div className="container-fluid">
-      <div className="row py-5 text-light bg-default-image">
-        <div className="col text-center">
-          <h1>Register</h1>
+    <div className="Background">
+      <img src="/images/logo.png" alt="logo_big" style={{width:"250px", marginTop:"10px"}} />
+      <div className="container-fluid">
+        <div className="row text-light ">
+          <div className="col text-center">
+            <h1 style={{  textShadow: '2px 2px 8px #000' }}>Register</h1>
+          </div>
         </div>
-      </div>
 
-      <div className="row py-5">
-        <div className="col-md-6 offset-md-3">
-          <AuthForm
-            handleSubmit={handleSubmit}
-            name={name}
-            setName={setName}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            secret={secret}
-            setSecret={setSecret}
-            loading={loading}
-          />
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col">
-          <Modal
-            title="Congratulations!"
-            open={ok}
-            onCancel={() => setOk(false)}
-            footer={null}
-          >
-            <p>You have successfully registered.</p>
-            <Link href="/login" className="btn btn-primary btn-sm">
-              Login
-            </Link>
-          </Modal>
+        <div className="row ">
+          <div className="col-md-6 offset-md-3">
+            <AuthForm
+              handleSubmit={handleSubmit}
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              secret={secret}
+              setSecret={setSecret}
+              loading={loading}
+            />
+          </div>
         </div>
 
         <div className="row">
           <div className="col">
-            <p className="text-center">
-              Already registered?
-              <Link href="/login"> Login</Link>
-            </p>
+            <Modal
+              title="Congratulations!"
+              open={ok}
+              onCancel={() => setOk(false)}
+              footer={null}
+            >
+              <p>You have successfully registered.</p>
+              <Link href="/login" className="btn btn-primary btn-sm">
+                Login
+              </Link>
+            </Modal>
+          </div>
+
+          <div className="row">
+            <div className="col">
+              <p className="text-center">
+                Already registered?
+                <Link href="/login"> Login</Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

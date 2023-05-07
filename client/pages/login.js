@@ -49,43 +49,47 @@ const Login = () => {
   if (state && state.token) router.push("/user/dashboard");
 
   return (
-    <div className="container-fluid">
-      <div className="row py-5 text-light bg-default-image">
-        <div className="col text-center">
-          <h1>Login</h1>
+    <div className="Background">
+      <img src="/images/logo.png" alt="logo_big" style={{width:"250px"}} />
+      <div className="container-fluid">
+      
+        <div className="row text-light">
+          <div className="col text-center">
+            <h1 style={{  textShadow: '2px 2px 8px #000' }}>Login</h1>
+          </div>
         </div>
-      </div>
 
-      <div className="row py-5">
-        <div className="col-md-6 offset-md-3">
-          <AuthForm
-            handleSubmit={handleSubmit}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            loading={loading}
-            page="login"
-          />
+        <div className="row py-2">
+          <div className="col-md-6 offset-md-3">
+            <AuthForm
+              handleSubmit={handleSubmit}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              loading={loading}
+              page="login"
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="row">
-        <div className="col">
-          <p className="text-center">
-            Not yet registered?
-            <Link href="/register"> Register</Link>
-          </p>
+        <div className="row">
+          <div className="col">
+            <p className="text-center">
+              Not yet registered?
+              <Link href="/register"> Register</Link>
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div className="row">
-        <div className="col">
-          <p className="text-center">
-            <Link href="/forgot-password" className="text-danger">
-              Forgot Password
-            </Link>
-          </p>
+        <div className="row">
+          <div className="col">
+            <p className="text-center">
+              <Link href="/forgot-password" className="text-danger">
+                Forgot Password
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

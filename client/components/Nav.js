@@ -24,7 +24,7 @@ const Nav = () => {
   return (
     <nav
       className="nav d-flex justify-content-end"
-      style={{ backgroundColor: "blue" }}
+      style={{ backgroundColor: "blue",borderBottom: "2px solid gold"}}
     >
       <Link
         href="/"
@@ -32,7 +32,7 @@ const Nav = () => {
           currentLink === "/" && "active"
         }`}
       >
-        <Avatar src="/images/logo.png" />
+        <Avatar src="/images/logo_av.png" className="avatar"style={{ border: '3px solid gold' }}/>
         WeConnect
       </Link>
 

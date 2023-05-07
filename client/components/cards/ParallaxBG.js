@@ -1,3 +1,4 @@
+import { BorderBottomOutlined } from "@ant-design/icons";
 import { useContext } from "react";
 
 const ParallaxBG = ({ url, children = "WeConnect" }) => {
@@ -10,14 +11,26 @@ const ParallaxBG = ({ url, children = "WeConnect" }) => {
         padding: "100px 0px 75px 0px",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        backgroundPosition: "center center",
+        backgroundPosition: "center ",
         display: "block",
+        maxWidth: "2000px",
+        borderBottom: "5px solid gold"
+       
       }}
     >
-      <h1 className="display-1 font-weight-bold text-center py-5">
-        {children}
-      </h1>
+      <div className="Logo">
+        <img src="/images/logo.png" alt="logo_big" />
+        <h1 className="display-1 font-weight-bold "style={{ color: "gold", textShadow: "4px 4px 4px #2c4fd0" }}>
+         
+          {children}
+        </h1>
+        
+      </div>
+      <div className="sjsu">
+        <h4 className="font-weight-bold "style={{ color: "#2c4fd0", textShadow: "4px 4px 4px gold" }}>San Jose State University</h4>
+      </div>
     </div>
+    
   );
 };
 

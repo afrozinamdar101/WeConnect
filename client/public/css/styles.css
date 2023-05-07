@@ -1,3 +1,42 @@
+.Background{
+    background-image: url("/images/default.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+}
+.Background_index{
+    background-image: url("/images/default.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+}
+.dash_bg{
+    background-image: url("/images/default2.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+    
+    position: relative;
+}
+.container-fluid {
+    max-width: 1000px; /* change to your desired value */
+  }
 .bg-default-image {
     background-image: url("/images/default.jpg");
     background-size: 100%;
@@ -15,4 +54,115 @@
 
 .pointer {
     cursor: pointer;
+}
+img[src='/images/logo.png'][alt='logo_big'] {
+    display: block;
+
+   width: 20%;
+   height: 30%;
+   justify-content: center;
+  }
+.Logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50%;
+    margin: 0 auto;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.Logo:hover{
+    -webkit-animation: spin 5s infinite;
+    animation: spin 5s infinite;
+
+    }
+
+@-webkit-keyframes spin{
+    from {
+        -webkit-transform: rotateY(0deg);
+    }
+    to {
+        -webkit-transform: rotateY(-360deg);
+    }
+    }
+
+@keyframes spin{
+    from {
+        -moz-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+    }
+
+    to {
+        -moz-transform: rotateY(-360deg);
+        -ms-transform: rotateY(-360deg);
+        transform: rotateY(-360deg);
+    }
+    }
+.sjsu{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.sjsu:hover{
+    transform: scale(2);
+}
+.avatar{
+    vertical-align: middle;
+    
+    border-radius: 50%;
+}
+
+.avatar_class{
+    align-items: start;
+}
+
+.Logo_1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    align-items: center;
+
+}
+
+.card{
+   
+        background-color: lightblue;
+        border-radius: "50px";
+        padding: "20px";
+      
+}
+
+.follow_bg{
+    background-color: blue;
+    width : 80px;
+    align-items: center;
+    text-align: center;
+    border-radius: 30px;
+    color: white;
+}
+::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dash_bg1{
+    background-image: url("/images/default2.jpg");
+    background-repeat: repeat;
+    background-size:cover;
+
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    justify-content: center;
+    
+    position: relative;
+}
+
+.dash_head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
