@@ -24,7 +24,7 @@ const Nav = () => {
   return (
     <nav
       className="nav d-flex justify-content-end"
-      style={{ backgroundColor: "blue",borderBottom: "2px solid gold" }}
+      style={{ backgroundColor: "blue",borderBottom: "2px solid gold"}}
     >
       <Link
         href="/"
