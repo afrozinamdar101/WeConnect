@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Avatar, Modal } from "antd";
-import Link from "next/Link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { CameraOutlined, LoadingOutlined } from "@ant-design/icons";
 
@@ -110,7 +110,7 @@ const ProfileUpdate = () => {
               ) : uploading ? (
                 <LoadingOutlined className="mt-2" />
               ) : (
-                <CameraOutlined className="mt-2" />
+                <CameraOutlined className="mt-2" style={{color: "gold", fontSize: '2em'}} />
               )}
               <input
                 onChange={handleImage}
