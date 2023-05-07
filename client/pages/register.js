@@ -54,7 +54,7 @@ const Register = () => {
 
   return (
     <div className="Background">
-      <img src="/images/logo.png" alt="logo_big" style={{width:"250px"}} />
+      <img src="/images/logo.png" alt="logo_big" style={{width:"250px", marginTop:"10px"}} />
       <div className="container-fluid">
         <div className="row text-light ">
           <div className="col text-center">
