@@ -69,6 +69,28 @@ const PostComments = () => {
     }
   };
 
+  const handleLike = async (_id) => {
+    // console.log("Like post =>", _id);
+    try {
+      const { data } = await axios.put("/like-post", { _id });
+      // console.log("Liked =>", data);
+      fetchPost();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUnlike = async (_id) => {
+    // console.log("Unlike post =>", _id);
+    try {
+      const { data } = await axios.put("/unlike-post", { _id });
+      // console.log("Unliked =>", data);
+      fetchPost();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleDelete = async (post) => {
     try {
       const answer = window.confirm("Confirm Delete?");
@@ -95,6 +117,8 @@ const PostComments = () => {
           commentsCount={100}
           removeComment={removeComment}
           handleComment={handleComment}
+          handleLike={() => handleLike(post._id)}
+          handleUnlike={() => handleUnlike(post._id)}
           page="id"
         />
       </div>
@@ -103,8 +127,8 @@ const PostComments = () => {
         href="/user/dashboard"
         className="d-flex justify-content-center pt-5"
       >
-        <div className="follow_bg pb-2 " style={{ marginBottom: '1000px' }} >
-        <RollbackOutlined />
+        <div className="follow_bg pb-2 " style={{ marginBottom: "1000px" }}>
+          <RollbackOutlined />
         </div>
       </Link>
 
