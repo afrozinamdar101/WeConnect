@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Modal } from "antd";
-import Link from "next/Link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import ForgotPasswordForm from "../components/forms/ForgotPasswordForm";
